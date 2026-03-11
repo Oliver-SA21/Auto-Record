@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto-Record - Panel del Checador</title>
+    <link rel="icon" type="image/x-icon" href="/img/google.ico">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Logo" class="logo-circle">
+        Auto-Record
+    </div>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/funciones">Funciones</a>
+        <a href="/descargas">Descargas</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/informacion">Información</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Panel del Checador</h1>
+    <p class="subtitle">Bienvenido(a), <strong>Erick Uriel</strong> — Rol: Checador</p>
+
+    <section class="summary-cards">
+        <div class="card">
+            <div class="card-number">12</div>
+            <div class="card-label">Choferes activos</div>
+        </div>
+        <div class="card">
+            <div class="card-number">10</div>
+            <div class="card-label">Unidades en ruta</div>
+        </div>
+        <div class="card">
+            <div class="card-number">2</div>
+            <div class="card-label">Incidencias</div>
+        </div>
+        <div class="card">
+            <a href="#" class="card-link">Ver reporte diario</a>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="left-column">
+            <div class="form-card">
+                <h2>Registro de Vuelta</h2>
+                <form class="attendance-form">
+                    <div class="form-group">
+                        <label>Unidad Asignada:</label>
+                        <select>
+                            <option>Seleccionar</option>
+                            <option>TP-482</option>
+                            <option>TP-501</option>
+                            <option>TP-399</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre del chofer:</label>
+                        <select>
+                            <option>Selecciona</option>
+                            <option>Oliver Sanchez</option>
+                            <option>Aranza Garrido</option>
+                            <option>Jeysi Damari</option>
+                            <option>Laura Sanchez</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hora de Salida:</label>
+                            <input type="text" placeholder="00:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Hora de Llegada:</label>
+                            <input type="text" placeholder="00:00">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-primary">Guardar Registro</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <section class="drivers-section">
+                <h2>Choferes Activos Hoy</h2>
+                <table class="drivers-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Ruta asignada</th>
+                            <th>Entrada</th>
+                            <th>Salida</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carlos Méndez</td>
+                            <td>Ruta 5 - Centro</td>
+                            <td>06:00</td>
+                            <td>-</td>
+                            <td><span class="status active">En ruta</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ana Ramírez</td>
+                            <td>Ruta 3 - Sur</td>
+                            <td>06:15</td>
+                            <td>14:00</td>
+                            <td><span class="status finished">Finalizado</span></td>
+                        </tr>
+                        <tr>
+                            <td>José Gutiérrez</td>
+                            <td>Ruta 7 - Norte</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="status pending">Sin registrar</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <button type="button" class="btn-secondary">Generar Reporte</button>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="/" class="btn-outline">Cerrar sesión</a>
+    </div>
+</main>
+
+<footer>
+    TechHive Labs 2025 • Gestión inteligente de transporte público
+</footer>
+
+</body>
+</html>

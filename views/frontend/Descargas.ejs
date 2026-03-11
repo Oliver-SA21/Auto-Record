@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto-Record - Descargas</title>
+    <link rel="icon" type="image/x-icon" href="/img/google.ico">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Logo" class="logo-circle">
+        Auto-Record
+    </div>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/funciones">Funciones</a>
+        <a href="/descargas">Descargas</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/informacion">Información</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="download-section">
+        <div class="content-left">
+            <h1>Descargas</h1>
+            <p>Descarga nuestra aplicación y aprovecha sus características para optimizar la supervisión de flotas de transporte.</p>
+            <p>Úsala tanto en dispositivos de escritorio como en dispositivos móviles.</p>
+
+            <div class="download-buttons">
+                <a href="#" class="btn-download desktop" data-tipo="escritorio">Descarga para escritorio</a>
+                <a href="#" class="btn-download mobile" data-tipo="movil">Descarga para móvil</a>
+            </div>
+
+            <div class="downloads-total">
+                <h3>Descargas totales</h3>
+            </div>
+        </div>
+
+        <div class="content-right">
+            <div class="box">
+                <h2>Solución y funciones claves</h2>
+                <ul>
+                    <li>📍 Localización de unidades en tiempo real</li>
+                    <li>📄 Administración y monitoreo de rutas</li>
+                    <li>📋 Generación de reportes de mantenimiento</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h2>¿Por qué elegir Auto-Record?</h2>
+                <ul>
+                    <li>Más descargas</li>
+                    <li>95% de usuarios satisfechos</li>
+                    <li>+120 unidades administradas diariamente</li>
+                    <li>Reducción del 40% en errores comunes</li>
+                    <li>Sistema seguro con respaldo de datos automáticos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    TechHive Labs 2025 • Gestión inteligente de transporte público
+</footer>
+
+<script>
+document.querySelectorAll('.btn-download').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const tipo = this.dataset.tipo;
+        alert(`✅ La descarga para ${tipo} ha comenzado`);
+    });
+});
+</script>
+
+</body>
+</html>
