@@ -39,8 +39,8 @@ Desarrollar una aplicación web que permita la administración, monitoreo y cont
 
 | No. | Descripción                                           | Estatus       |
 |----:|-------------------------------------------------------|---------------|
-| 1 | Configuarion inicial del proyecto(NodeJs) | ⏳ |
-| 2 | Creacion de index y css | ❌ |
+| 1 | Configuarion inicial del proyecto(NodeJs) | ✅ |
+| 2 | Creacion de index y css | ⏳ |
 | 3 | Intengracion de nuevas pantallas | ❌ |
 | 4 | Configuracion de APIS | ❌ |
 | 5 | Documentacion | ❌ |
