@@ -2,80 +2,165 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto-Record - Descargas</title>
     <link rel="icon" type="image/x-icon" href="/img/google.ico">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-<header>
-    <div class="logo-container">
-        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Logo" class="logo-circle">
-        Auto-Record
+    <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-sky-500 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md">
+            <div>
+                <h1 class="text-2xl font-bold tracking-wide">Auto-Record</h1>
+                <p class="text-sm text-blue-100">Control inteligente para rutas y unidades</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap gap-3 text-sm md:text-base font-medium">
+            <a href="/" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition">Inicio</a>
+            <a href="/funciones" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Funciones</a>
+            <a href="/descargas" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Descargas</a>
+            <a href="/nosotros" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Nosotros</a>
+            <a href="/informacion" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Información</a>
+        </nav>
     </div>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/funciones">Funciones</a>
-        <a href="/descargas">Descargas</a>
-        <a href="/nosotros">Nosotros</a>
-        <a href="/informacion">Información</a>
-    </nav>
 </header>
 
-<main class="container">
-    <section class="download-section">
-        <div class="content-left">
-            <h1>Descargas</h1>
-            <p>Descarga nuestra aplicación y aprovecha sus características para optimizar la supervisión de flotas de transporte.</p>
-            <p>Úsala tanto en dispositivos de escritorio como en dispositivos móviles.</p>
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <section class="grid lg:grid-cols-2 gap-10 items-center mb-12">
+            <div>
+                <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full mb-5">
+                    Descarga Auto-Record en tu dispositivo
+                </span>
 
-            <div class="download-buttons">
-                <a href="#" class="btn-download desktop" data-tipo="escritorio">Descarga para escritorio</a>
-                <a href="#" class="btn-download mobile" data-tipo="movil">Descarga para móvil</a>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+                    Lleva el control del transporte público a donde lo necesites
+                </h2>
+
+                <p class="text-lg text-slate-600 leading-relaxed mb-5">
+                    Descarga Auto-Record y accede a una solución pensada para mejorar la supervisión de rutas, el monitoreo de unidades y el registro de incidencias desde escritorio o dispositivo móvil.
+                </p>
+
+                <p class="text-slate-600 leading-relaxed mb-8">
+                    Nuestra plataforma está diseñada para ofrecer una experiencia práctica, clara y eficiente, permitiendo a los usuarios mantener el control operativo con mayor organización y rapidez.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <a href="#" class="btn-download desktop inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="escritorio">
+                        <span class="text-2xl">💻</span>
+                        <span>Descargar para escritorio</span>
+                    </a>
+
+                    <a href="#" class="btn-download mobile inline-flex items-center justify-center gap-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="movil">
+                        <span class="text-2xl">📱</span>
+                        <span>Descargar para móvil</span>
+                    </a>
+                </div>
+
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-5">
+                        <h3 class="text-2xl font-extrabold text-blue-700">+1,200</h3>
+                        <p class="text-sm text-slate-600">Descargas simuladas</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-5">
+                        <h3 class="text-2xl font-extrabold text-blue-700">95%</h3>
+                        <p class="text-sm text-slate-600">Satisfacción estimada</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-5">
+                        <h3 class="text-2xl font-extrabold text-blue-700">24/7</h3>
+                        <p class="text-sm text-slate-600">Disponibilidad del sistema</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="downloads-total">
-                <h3>Descargas totales</h3>
+            <div class="grid gap-6">
+                <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">🚀</div>
+                        <h3 class="text-2xl font-bold text-slate-900">¿Qué incluye Auto-Record?</h3>
+                    </div>
+
+                    <ul class="space-y-4 text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="text-blue-700 font-bold">✔</span>
+                            <span>Seguimiento de unidades en tiempo real para mejorar la supervisión operativa.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-blue-700 font-bold">✔</span>
+                            <span>Control y administración de rutas, horarios y registros diarios.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-blue-700 font-bold">✔</span>
+                            <span>Registro de incidencias y generación de reportes para un mejor control del servicio.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-blue-700 font-bold">✔</span>
+                            <span>Interfaz accesible para diferentes roles dentro del sistema.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-900 to-sky-600 text-white rounded-3xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4">¿Por qué elegir Auto-Record?</h3>
+                    <ul class="space-y-3 text-blue-100">
+                        <li>• Centraliza la información clave del transporte público en una sola plataforma.</li>
+                        <li>• Reduce errores en registros manuales y mejora la coordinación del servicio.</li>
+                        <li>• Facilita la toma de decisiones con información organizada y accesible.</li>
+                        <li>• Ayuda a supervisores, checadores y choferes a trabajar con mayor eficiencia.</li>
+                    </ul>
+                </div>
             </div>
+        </section>
+
+        <section class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 md:p-10">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
+                    <div class="text-3xl mb-4">🖥️</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Versión de escritorio</h3>
+                    <p class="text-slate-600">
+                        Ideal para supervisión administrativa, consulta de reportes y gestión completa desde una computadora.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
+                    <div class="text-3xl mb-4">📲</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Versión móvil</h3>
+                    <p class="text-slate-600">
+                        Pensada para uso rápido en campo, registro de incidencias y consulta de información en movimiento.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
+                    <div class="text-3xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Sistema confiable</h3>
+                    <p class="text-slate-600">
+                        Diseñado para mantener organizada la información y ofrecer una experiencia más segura y eficiente.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-200 mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+            TechHive Labs 2025 • Gestión inteligente de transporte público
         </div>
+    </footer>
 
-        <div class="content-right">
-            <div class="box">
-                <h2>Solución y funciones claves</h2>
-                <ul>
-                    <li>📍 Localización de unidades en tiempo real</li>
-                    <li>📄 Administración y monitoreo de rutas</li>
-                    <li>📋 Generación de reportes de mantenimiento</li>
-                </ul>
-            </div>
-
-            <div class="box">
-                <h2>¿Por qué elegir Auto-Record?</h2>
-                <ul>
-                    <li>Más descargas</li>
-                    <li>95% de usuarios satisfechos</li>
-                    <li>+120 unidades administradas diariamente</li>
-                    <li>Reducción del 40% en errores comunes</li>
-                    <li>Sistema seguro con respaldo de datos automáticos</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    TechHive Labs 2025 • Gestión inteligente de transporte público
-</footer>
-
-<script>
-document.querySelectorAll('.btn-download').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const tipo = this.dataset.tipo;
-        alert(`✅ La descarga para ${tipo} ha comenzado`);
+    <script>
+    document.querySelectorAll('.btn-download').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tipo = this.dataset.tipo;
+            alert(`✅ La descarga para ${tipo} ha comenzado`);
+        });
     });
-});
-</script>
+    </script>
 
 </body>
 </html>

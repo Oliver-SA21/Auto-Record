@@ -14,9 +14,9 @@
   "author": "",
   "type": "commonjs",
   "main": "index.js",
-  "scripts": {
+"scripts": {
   "dev": "nodemon index.js",
-  "watch:css": "npx @tailwindcss/cli -i ./public/css/styles.css -o ./public/css/styles.css --watch"
+  "watch:css": "npx @tailwindcss/cli -i ./src/css/styles.css -o ./public/css/styles.css --watch"
 },
   "dependencies": {
     "@dr.pogodin/csurf": "^1.16.8",

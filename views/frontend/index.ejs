@@ -2,55 +2,172 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto-Record - Inicio</title>
     <link rel="icon" type="image/x-icon" href="/img/google.ico">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-<header>
-    <div class="logo-container">
-        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Logo" class="logo-circle">
-        Auto-Record
-    </div>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/funciones">Funciones</a>
-        <a href="/descargas">Descargas</a>
-        <a href="/nosotros">Nosotros</a>
-        <a href="/informacion">Información</a>
-    </nav>
-</header>
+    <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-sky-500 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wide">Auto-Record</h1>
+                    <p class="text-sm text-blue-100">Control inteligente para rutas y unidades</p>
+                </div>
+            </div>
 
-<main class="container">
-    <h1>Bienvenido a Auto-Record</h1>
-    <p class="subtitle">Sistema de gestión para rutas de transporte público</p>
-
-    <h2>Selecciona tu rol para continuar</h2>
-
-    <div class="cards-grid">
-        <div class="role-card">
-            <h3>Checador</h3>
-            <p>Registro y validación de horarios de choferes, control de entradas y salidas, y verificación de cumplimiento de rutas.</p>
-            <a href="/checador" class="btn-primary">Acceder como Checador</a>
+            <nav class="flex flex-wrap gap-3 text-sm md:text-base font-medium">
+                <a href="/" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition">Inicio</a>
+                <a href="/funciones" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Funciones</a>
+                <a href="/descargas" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Descargas</a>
+                <a href="/nosotros" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Nosotros</a>
+                <a href="/informacion" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Información</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="role-card">
-            <h3>Chofer</h3>
-            <p>Consulta tus rutas, reporta incidencias en tiempo real y registra tu estado de servicio diario.</p>
-            <a href="/chofer" class="btn-primary">Acceder como Chofer</a>
+    <main>
+        <section class="max-w-7xl mx-auto px-6 py-14">
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+                <div>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full mb-5">
+                        Plataforma de gestión de transporte público
+                    </span>
+
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+                        Supervisa rutas, registra vueltas y mejora el control operativo con Auto-Record
+                    </h2>
+
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                        Auto-Record es una solución diseñada para optimizar la administración del transporte público, facilitando el seguimiento de choferes, unidades, horarios e incidencias en una sola plataforma.
+                    </p>
+
+                    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-4">
+                            <h3 class="text-2xl font-bold text-blue-700">+120</h3>
+                            <p class="text-sm text-slate-600">Unidades monitoreables</p>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-4">
+                            <h3 class="text-2xl font-bold text-blue-700">24/7</h3>
+                            <p class="text-sm text-slate-600">Control y seguimiento</p>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-4">
+                            <h3 class="text-2xl font-bold text-blue-700">100%</h3>
+                            <p class="text-sm text-slate-600">Enfoque en eficiencia</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="/descargas" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition">
+                            Descargar aplicación
+                        </a>
+                        <a href="/informacion" class="bg-white hover:bg-slate-100 text-blue-700 border border-blue-200 font-semibold px-6 py-3 rounded-xl shadow-sm transition">
+                            Conocer más
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="bg-white p-4 rounded-3xl shadow-2xl border border-blue-100 w-full max-w-lg">
+                        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Vista previa Auto-Record" class="w-full h-[380px] object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-14">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Selecciona tu rol para continuar</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Accede al módulo que corresponde a tus actividades dentro del sistema y gestiona la operación de forma rápida, segura y organizada.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl mb-5">
+                        📋
+                    </div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Checador</h3>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Registra entradas y salidas, controla vueltas, verifica horarios y da seguimiento al cumplimiento de las rutas asignadas para mantener un control operativo preciso.
+                    </p>
+                    <ul class="space-y-3 text-slate-600 mb-8">
+                        <li>✔ Registro de horarios de salida y llegada</li>
+                        <li>✔ Monitoreo de choferes activos</li>
+                        <li>✔ Generación de reportes diarios</li>
+                    </ul>
+                    <a href="/checador" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition">
+                        Acceder como Checador
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-lg border border-sky-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl mb-5">
+                        🚌
+                    </div>
+                    <h3 class="text-2xl font-bold text-sky-800 mb-4">Chofer</h3>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Consulta tu ruta asignada, reporta incidencias en tiempo real y mantén actualizado tu estado de servicio para mejorar la comunicación y la eficiencia diaria.
+                    </p>
+                    <ul class="space-y-3 text-slate-600 mb-8">
+                        <li>✔ Consulta de rutas y horarios</li>
+                        <li>✔ Reporte de incidencias</li>
+                        <li>✔ Historial de servicio reciente</li>
+                    </ul>
+                    <a href="/chofer" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-3 rounded-xl transition">
+                        Acceder como Chofer
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+            <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">Una solución pensada para el transporte moderno</h2>
+                    <p class="text-blue-100 leading-relaxed">
+                        Auto-Record busca digitalizar procesos clave del transporte público, reduciendo errores manuales, mejorando la supervisión de rutas y facilitando la toma de decisiones mediante información organizada y accesible.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
+                        <h3 class="text-xl font-bold mb-2">Seguridad</h3>
+                        <p class="text-sm text-blue-100">Mayor control sobre incidencias, registros y operación diaria.</p>
+                    </div>
+                    <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
+                        <h3 class="text-xl font-bold mb-2">Organización</h3>
+                        <p class="text-sm text-blue-100">Información centralizada para facilitar la gestión de rutas.</p>
+                    </div>
+                    <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
+                        <h3 class="text-xl font-bold mb-2">Seguimiento</h3>
+                        <p class="text-sm text-blue-100">Monitoreo continuo de choferes, unidades y horarios.</p>
+                    </div>
+                    <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
+                        <h3 class="text-xl font-bold mb-2">Eficiencia</h3>
+                        <p class="text-sm text-blue-100">Procesos más rápidos y menos errores en el registro diario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 py-12 text-center">
+            <p class="text-slate-600 text-lg">
+                ¿No tienes cuenta? <span class="font-semibold text-blue-700">Comunícate con tu administrador</span> para darte de alta en el sistema.
+            </p>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-200">
+        <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+            TechHive Labs 2025 • Gestión inteligente de transporte público
         </div>
-    </div>
+    </footer>
 
-    <p class="footer-note">
-        ¿No tienes cuenta? Comunícate con tu Administrador para darte de alta en el sistema.
-    </p>
-</main>
-
-<footer>
-    TechHive Labs 2025 • Gestión inteligente de transporte público
-</footer>
-
-<script src="/js/script2.js"></script>
+    <script src="/js/script2.js"></script>
 </body>
 </html>
