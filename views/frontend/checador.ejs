@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Record - Panel del Checador</title>
+    <link rel="icon" type="image/x-icon" href="/img/google.ico">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-sky-500 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md">
+            <div>
+                <h1 class="text-2xl font-bold tracking-wide">Auto-Record</h1>
+                <p class="text-sm text-blue-100">Control inteligente para rutas y unidades</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap gap-3 text-sm md:text-base font-medium">
+            <a href="/" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition">Inicio</a>
+            <a href="/funciones" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Funciones</a>
+            <a href="/descargas" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Descargas</a>
+            <a href="/nosotros" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Nosotros</a>
+            <a href="/informacion" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Información</a>
+        </nav>
+    </div>
+</header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <section class="mb-10">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+                        Módulo de supervisión y control
+                    </span>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Panel del Checador</h2>
+                    <p class="text-lg text-slate-600">
+                        Bienvenido(a), <strong class="text-blue-800">Usuario</strong>. Desde este panel puedes registrar vueltas, supervisar choferes en servicio y mantener el control diario de las rutas activas.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-5 min-w-[260px]">
+                    <p class="text-sm text-slate-500 mb-1">Rol activo</p>
+                    <p class="text-xl font-bold text-blue-800">Checador</p>
+                    <p class="text-sm text-slate-600 mt-2">Gestión de entradas, salidas y seguimiento operativo en tiempo real.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
+            <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
+                <p class="text-sm text-slate-500 mb-2">Choferes activos</p>
+                <h3 class="text-3xl font-extrabold text-blue-700">12</h3>
+                <p class="text-sm text-slate-600 mt-2">Choferes actualmente en operación.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
+                <p class="text-sm text-slate-500 mb-2">Unidades en ruta</p>
+                <h3 class="text-3xl font-extrabold text-blue-700">10</h3>
+                <p class="text-sm text-slate-600 mt-2">Unidades activas dentro del servicio.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
+                <p class="text-sm text-slate-500 mb-2">Incidencias reportadas</p>
+                <h3 class="text-3xl font-extrabold text-blue-700">2</h3>
+                <p class="text-sm text-slate-600 mt-2">Eventos o incidencias registradas hoy.</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-700 to-sky-500 text-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
+                <div>
+                    <p class="text-sm text-blue-100 mb-2">Acción rápida</p>
+                    <h3 class="text-2xl font-bold mb-3">Reporte diario</h3>
+                    <p class="text-sm text-blue-100">Consulta el resumen general de la jornada.</p>
+                </div>
+                <a href="#" class="mt-5 inline-block bg-white text-blue-700 font-semibold px-4 py-2 rounded-xl hover:bg-slate-100 transition">
+                    Ver reporte
+                </a>
+            </div>
+        </section>
+
+        <section class="grid lg:grid-cols-5 gap-8">
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">📝</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-blue-800">Registro de Vuelta</h3>
+                            <p class="text-sm text-slate-500">Captura horarios y asignaciones del servicio</p>
+                        </div>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Unidad asignada</label>
+                            <select class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option>Seleccionar</option>
+                                <option>TP-482</option>
+                                <option>TP-501</option>
+                                <option>TP-399</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Nombre del chofer</label>
+                            <select class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option>Selecciona</option>
+                                <option>Oliver Sanchez</option>
+                                <option>Aranza Garrido</option>
+                                <option>Jeysi Damari</option>
+                                <option>Laura Sanchez</option>
+                            </select>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de salida</label>
+                                <input type="text" placeholder="00:00" class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de llegada</label>
+                                <input type="text" placeholder="00:00" class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            </div>
+                        </div>
+
+                        <button type="button" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition">
+                            Guardar registro
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 space-y-6">
+                <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">Choferes activos hoy</h3>
+                            <p class="text-slate-500">Consulta el estado actual de operación de cada chofer.</p>
+                        </div>
+
+                        <button type="button" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-3 rounded-xl transition">
+                            Generar reporte
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[700px] text-left border-collapse">
+                            <thead>
+                                <tr class="bg-blue-50 text-slate-700">
+                                    <th class="px-4 py-3 text-sm font-semibold">Nombre</th>
+                                    <th class="px-4 py-3 text-sm font-semibold">Ruta asignada</th>
+                                    <th class="px-4 py-3 text-sm font-semibold">Entrada</th>
+                                    <th class="px-4 py-3 text-sm font-semibold">Salida</th>
+                                    <th class="px-4 py-3 text-sm font-semibold">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-4 font-medium text-slate-800">Carlos Méndez</td>
+                                    <td class="px-4 py-4 text-slate-600">Ruta 5 - Centro</td>
+                                    <td class="px-4 py-4 text-slate-600">06:00</td>
+                                    <td class="px-4 py-4 text-slate-600">-</td>
+                                    <td class="px-4 py-4">
+                                        <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-3 py-1 text-sm font-semibold">
+                                            En ruta
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-4 font-medium text-slate-800">Ana Ramírez</td>
+                                    <td class="px-4 py-4 text-slate-600">Ruta 3 - Sur</td>
+                                    <td class="px-4 py-4 text-slate-600">06:15</td>
+                                    <td class="px-4 py-4 text-slate-600">14:00</td>
+                                    <td class="px-4 py-4">
+                                        <span class="inline-flex items-center rounded-full bg-blue-100 text-blue-700 px-3 py-1 text-sm font-semibold">
+                                            Finalizado
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-4 font-medium text-slate-800">José Gutiérrez</td>
+                                    <td class="px-4 py-4 text-slate-600">Ruta 7 - Norte</td>
+                                    <td class="px-4 py-4 text-slate-600">-</td>
+                                    <td class="px-4 py-4 text-slate-600">-</td>
+                                    <td class="px-4 py-4">
+                                        <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-3 py-1 text-sm font-semibold">
+                                            Sin registrar
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-3xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-3">Control operativo en tiempo real</h3>
+                    <p class="text-blue-100 leading-relaxed mb-5">
+                        Mantén una supervisión más precisa sobre salidas, llegadas y estado de las unidades para mejorar la coordinación del servicio y reducir errores en el registro manual.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="/" class="bg-white text-blue-700 font-semibold px-5 py-3 rounded-xl hover:bg-slate-100 transition">
+                            Volver al inicio
+                        </a>
+                        <a href="#" class="bg-white/10 border border-white/20 text-white font-semibold px-5 py-3 rounded-xl hover:bg-white/20 transition">
+                            Ver incidencias
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-200 mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+            TechHive Labs 2025 • Gestión inteligente de transporte público
+        </div>
+    </footer>
+
+</body>
+</html>
