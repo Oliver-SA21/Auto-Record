@@ -5,11 +5,11 @@ const router = express.Router();
 
 // GOOGLE
 router.get("/google", (req, res, next) => {
-  const rol = req.query.rol || req.session.rol || "usuario";
-  req.session.rol = rol;
+  const rol = req.query.rol || "usuario";
 
   passport.authenticate("google", {
     scope: ["profile", "email"],
+    state: rol,
   })(req, res, next);
 });
 
@@ -19,7 +19,7 @@ router.get(
     failureRedirect: "/login-social",
   }),
   (req, res) => {
-    const rol = req.session.rol || "usuario";
+    const rol = req.query.state || "usuario";
 
     if (rol === "checador") return res.redirect("/checador");
     if (rol === "chofer") return res.redirect("/chofer");
@@ -30,11 +30,11 @@ router.get(
 
 // FACEBOOK
 router.get("/facebook", (req, res, next) => {
-  const rol = req.query.rol || req.session.rol || "usuario";
-  req.session.rol = rol;
+  const rol = req.query.rol || "usuario";
 
   passport.authenticate("facebook", {
     scope: ["email"],
+    state: rol,
   })(req, res, next);
 });
 
@@ -44,7 +44,7 @@ router.get(
     failureRedirect: "/login-social",
   }),
   (req, res) => {
-    const rol = req.session.rol || "usuario";
+    const rol = req.query.state || "usuario";
 
     if (rol === "checador") return res.redirect("/checador");
     if (rol === "chofer") return res.redirect("/chofer");

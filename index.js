@@ -38,7 +38,6 @@ app.get("/", (req, res) => {
 
 app.get("/login-social", (req, res) => {
   const rol = req.query.rol || "usuario";
-  req.session.rol = rol;
   res.render("frontend/login-social", { rol });
 });
 
