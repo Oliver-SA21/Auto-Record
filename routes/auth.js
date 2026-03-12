@@ -21,10 +21,20 @@ router.get(
   (req, res) => {
     const rol = req.query.state || "usuario";
 
-    if (rol === "checador") return res.redirect("/checador");
-    if (rol === "chofer") return res.redirect("/chofer");
+    if (req.user) {
+      req.user.rol = rol;
+    }
 
-    res.redirect("/");
+    req.login(req.user, (err) => {
+      if (err) {
+        return res.redirect("/");
+      }
+
+      if (rol === "checador") return res.redirect("/checador");
+      if (rol === "chofer") return res.redirect("/chofer");
+
+      res.redirect("/");
+    });
   }
 );
 
@@ -46,10 +56,20 @@ router.get(
   (req, res) => {
     const rol = req.query.state || "usuario";
 
-    if (rol === "checador") return res.redirect("/checador");
-    if (rol === "chofer") return res.redirect("/chofer");
+    if (req.user) {
+      req.user.rol = rol;
+    }
 
-    res.redirect("/");
+    req.login(req.user, (err) => {
+      if (err) {
+        return res.redirect("/");
+      }
+
+      if (rol === "checador") return res.redirect("/checador");
+      if (rol === "chofer") return res.redirect("/chofer");
+
+      res.redirect("/");
+    });
   }
 );
 

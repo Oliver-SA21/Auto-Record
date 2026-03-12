@@ -33,7 +33,9 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
-  res.render("frontend/index");
+  res.render("frontend/index", {
+    user: req.user || null
+  });
 });
 
 app.get("/login-social", (req, res) => {
@@ -42,27 +44,39 @@ app.get("/login-social", (req, res) => {
 });
 
 app.get("/checador", (req, res) => {
-  res.render("frontend/checador");
+  res.render("frontend/checador", {
+    user: req.user || null
+  });
 });
 
 app.get("/chofer", (req, res) => {
-  res.render("frontend/chofer");
+  res.render("frontend/chofer", {
+    user: req.user || null
+  });
 });
 
 app.get("/descargas", (req, res) => {
-  res.render("frontend/Descargas");
+  res.render("frontend/Descargas", {
+    user: req.user || null
+  });
 });
 
 app.get("/funciones", (req, res) => {
-  res.render("frontend/Funciones");
+  res.render("frontend/Funciones", {
+    user: req.user || null
+  });
 });
 
 app.get("/informacion", (req, res) => {
-  res.render("frontend/informacion");
+  res.render("frontend/informacion", {
+    user: req.user || null
+  });
 });
 
 app.get("/nosotros", (req, res) => {
-  res.render("frontend/Nosotros");
+  res.render("frontend/Nosotros", {
+    user: req.user || null
+  });
 });
 
 app.listen(PORT, () => {
