@@ -49,15 +49,19 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                    <a href="#" class="btn-download desktop inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="escritorio">
+
+                    <a href="/downloads/Mua.png" download data-tipo="escritorio"
+                    class="btn-download inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition">
                         <span class="text-2xl">💻</span>
                         <span>Descargar para escritorio</span>
                     </a>
 
-                    <a href="#" class="btn-download mobile inline-flex items-center justify-center gap-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="movil">
+                    <a href="/downloads/Mua.png" download data-tipo="móvil"
+                    class="btn-download inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition">
                         <span class="text-2xl">📱</span>
                         <span>Descargar para móvil</span>
                     </a>
+
                 </div>
 
                 <div class="grid sm:grid-cols-3 gap-4">
@@ -151,16 +155,5 @@
             TechHive Labs 2025 • Gestión inteligente de transporte público
         </div>
     </footer>
-
-    <script>
-    document.querySelectorAll('.btn-download').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tipo = this.dataset.tipo;
-            alert(`✅ La descarga para ${tipo} ha comenzado`);
-        });
-    });
-    </script>
-
 </body>
 </html>
