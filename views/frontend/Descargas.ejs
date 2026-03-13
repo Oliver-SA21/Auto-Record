@@ -20,9 +20,9 @@
         </div>
 
         <nav class="flex flex-wrap gap-3 text-sm md:text-base font-medium">
-            <a href="/" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition">Inicio</a>
+            <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Inicio</a>
             <a href="/funciones" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Funciones</a>
-            <a href="/descargas" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Descargas</a>
+            <a href="/" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition">Descargas</a>
             <a href="/nosotros" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Nosotros</a>
             <a href="/informacion" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Información</a>
         </nav>
@@ -49,15 +49,17 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                    <a href="#" class="btn-download desktop inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="escritorio">
-                        <span class="text-2xl">💻</span>
+
+                    <a href="/downloads/Mua.png" download data-tipo="escritorio"
+                    class="btn-download inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition">
                         <span>Descargar para escritorio</span>
                     </a>
 
-                    <a href="#" class="btn-download mobile inline-flex items-center justify-center gap-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition" data-tipo="movil">
-                        <span class="text-2xl">📱</span>
+                    <a href="/downloads/Mua.png" download data-tipo="móvil"
+                    class="btn-download inline-flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition">
                         <span>Descargar para móvil</span>
                     </a>
+
                 </div>
 
                 <div class="grid sm:grid-cols-3 gap-4">
@@ -81,7 +83,6 @@
             <div class="grid gap-6">
                 <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
                     <div class="flex items-center gap-3 mb-5">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">🚀</div>
                         <h3 class="text-2xl font-bold text-slate-900">¿Qué incluye Auto-Record?</h3>
                     </div>
 
@@ -120,7 +121,6 @@
         <section class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 md:p-10">
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
-                    <div class="text-3xl mb-4">🖥️</div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">Versión de escritorio</h3>
                     <p class="text-slate-600">
                         Ideal para supervisión administrativa, consulta de reportes y gestión completa desde una computadora.
@@ -128,7 +128,6 @@
                 </div>
 
                 <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
-                    <div class="text-3xl mb-4">📲</div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">Versión móvil</h3>
                     <p class="text-slate-600">
                         Pensada para uso rápido en campo, registro de incidencias y consulta de información en movimiento.
@@ -136,7 +135,6 @@
                 </div>
 
                 <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
-                    <div class="text-3xl mb-4">🔒</div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">Sistema confiable</h3>
                     <p class="text-slate-600">
                         Diseñado para mantener organizada la información y ofrecer una experiencia más segura y eficiente.
@@ -151,16 +149,5 @@
             TechHive Labs 2025 • Gestión inteligente de transporte público
         </div>
     </footer>
-
-    <script>
-    document.querySelectorAll('.btn-download').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tipo = this.dataset.tipo;
-            alert(`✅ La descarga para ${tipo} ha comenzado`);
-        });
-    });
-    </script>
-
 </body>
 </html>

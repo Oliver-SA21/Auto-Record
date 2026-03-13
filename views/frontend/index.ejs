@@ -71,58 +71,86 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <div class="bg-white p-4 rounded-3xl shadow-2xl border border-blue-100 w-full max-w-lg">
-                        <img src="https://pbs.twimg.com/media/GK7DstZXwAApufZ.jpg" alt="Vista previa Auto-Record" class="w-full h-[380px] object-cover rounded-2xl">
+                    <div class="bg-white p-4 rounded-3xl shadow-2xl border border-blue-100 w-full">
+                        <img src="/img/Captura2.png" 
+                        alt="Vista previa Auto-Record" 
+                        class="w-full h-auto rounded-2xl object-contain">
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="max-w-7xl mx-auto px-6 pb-14">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Selecciona tu rol para continuar</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">
-                    Accede al módulo que corresponde a tus actividades dentro del sistema y gestiona la operación de forma rápida, segura y organizada.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl mb-5">
-                        📋
-                    </div>
-                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Checador</h3>
-                    <p class="text-slate-600 leading-relaxed mb-6">
-                        Registra entradas y salidas, controla vueltas, verifica horarios y da seguimiento al cumplimiento de las rutas asignadas para mantener un control operativo preciso.
+            <% if (user && user.rol) { %>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Continúa con tu acceso</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">
+                        Has iniciado sesión como 
+                        <span class="font-semibold text-blue-700 capitalize"><%= user.rol %></span>.
+                        Accede directamente a tu panel.
                     </p>
-                    <ul class="space-y-3 text-slate-600 mb-8">
-                        <li>✔ Registro de horarios de salida y llegada</li>
-                        <li>✔ Monitoreo de choferes activos</li>
-                        <li>✔ Generación de reportes diarios</li>
-                    </ul>
-                    <a href="/checador" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition">
-                        Acceder como Checador
-                    </a>
                 </div>
 
-                <div class="bg-white rounded-3xl shadow-lg border border-sky-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
-                    <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl mb-5">
-                        🚌
+                <div class="flex justify-center">
+                    <div class="w-full max-w-2xl bg-white rounded-3xl shadow-lg border border-blue-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl mb-5 mx-auto">
+                            <%= user.rol === "chofer" ? "🚌" : "📋" %>
+                        </div>
+
+                        <h3 class="text-3xl font-bold text-blue-800 mb-4 capitalize">
+                            <%= user.rol %>
+                        </h3>
+
+                        <p class="text-slate-600 leading-relaxed mb-6 max-w-xl mx-auto">
+                            Bienvenido(a), <strong class="text-blue-800"><%= user.name %></strong>. Tu sesión está activa y puedes ingresar directamente a tu panel de trabajo.
+                        </p>
+
+                        <a href="/<%= user.rol %>" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-xl transition">
+                            Ingresar como <%= user.rol %>
+                        </a>
                     </div>
-                    <h3 class="text-2xl font-bold text-sky-800 mb-4">Chofer</h3>
-                    <p class="text-slate-600 leading-relaxed mb-6">
-                        Consulta tu ruta asignada, reporta incidencias en tiempo real y mantén actualizado tu estado de servicio para mejorar la comunicación y la eficiencia diaria.
-                    </p>
-                    <ul class="space-y-3 text-slate-600 mb-8">
-                        <li>✔ Consulta de rutas y horarios</li>
-                        <li>✔ Reporte de incidencias</li>
-                        <li>✔ Historial de servicio reciente</li>
-                    </ul>
-                    <a href="/chofer" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-3 rounded-xl transition">
-                        Acceder como Chofer
-                    </a>
                 </div>
-            </div>
+            <% } else { %>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Selecciona tu rol para continuar</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">
+                        Accede al módulo que corresponde a tus actividades dentro del sistema y gestiona la operación de forma rápida, segura y organizada.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">Checador</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Registra entradas y salidas, controla vueltas, verifica horarios y da seguimiento al cumplimiento de las rutas asignadas para mantener un control operativo preciso.
+                        </p>
+                        <ul class="space-y-3 text-slate-600 mb-8">
+                            <li>✔ Registro de horarios de salida y llegada</li>
+                            <li>✔ Monitoreo de choferes activos</li>
+                            <li>✔ Generación de reportes diarios</li>
+                        </ul>
+                        <a href="/login-social?rol=checador" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition">
+                            Acceder como Checador
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-lg border border-sky-100 p-8 hover:-translate-y-1 hover:shadow-2xl transition">
+                        
+                        <h3 class="text-2xl font-bold text-sky-800 mb-4">Chofer</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Consulta tu ruta asignada, reporta incidencias en tiempo real y mantén actualizado tu estado de servicio para mejorar la comunicación y la eficiencia diaria.
+                        </p>
+                        <ul class="space-y-3 text-slate-600 mb-8">
+                            <li>✔ Consulta de rutas y horarios</li>
+                            <li>✔ Reporte de incidencias</li>
+                            <li>✔ Historial de servicio reciente</li>
+                        </ul>
+                        <a href="/login-social?rol=chofer" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-3 rounded-xl transition">
+                            Acceder como Chofer
+                        </a>
+                    </div>
+                </div>
+            <% } %>
         </section>
 
         <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white">

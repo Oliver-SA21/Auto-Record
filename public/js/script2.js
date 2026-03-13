@@ -20,14 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // 2. ALERTA AMIGABLE AL HACER CLIC EN BOTONES DE DESCARGA
-    const downloadButtons = document.querySelectorAll('.btn-download, a[href="#"]');
-    downloadButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            alert("🚀 ¡Pronto disponible!\nEsta función estará lista en la próxima versión.");
-        });
-    });
+
 
     // 3. ANIMACIÓN DE APARICIÓN AL HACER SCROLL (solo para páginas como Funciones, Descarga, Nosotros)
     const animatedElements = document.querySelectorAll('h2, .card, .feature-card, .box, .mockup, .team-box, .contact-box');

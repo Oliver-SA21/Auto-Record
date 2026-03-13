@@ -38,7 +38,7 @@
                     </span>
                     <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Panel del Checador</h2>
                     <p class="text-lg text-slate-600">
-                        Bienvenido(a), <strong class="text-blue-800">Usuario</strong>. Desde este panel puedes registrar vueltas, supervisar choferes en servicio y mantener el control diario de las rutas activas.
+                        Bienvenido(a), <strong class="text-blue-800"><%= user.name %></strong>. Desde este panel puedes registrar vueltas, supervisar choferes en servicio y mantener el control diario de las rutas activas.
                     </p>
                 </div>
 
@@ -85,7 +85,6 @@
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">📝</div>
                         <div>
                             <h3 class="text-2xl font-bold text-blue-800">Registro de Vuelta</h3>
                             <p class="text-sm text-slate-500">Captura horarios y asignaciones del servicio</p>
@@ -203,12 +202,15 @@
                     <p class="text-blue-100 leading-relaxed mb-5">
                         Mantén una supervisión más precisa sobre salidas, llegadas y estado de las unidades para mejorar la coordinación del servicio y reducir errores en el registro manual.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="/" class="bg-white text-blue-700 font-semibold px-5 py-3 rounded-xl hover:bg-slate-100 transition">
-                            Volver al inicio
+                    <div class="flex flex-wrap gap-4 mt-6">
+                        <a href="/auth/logout"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-white text-blue-800 font-semibold shadow-sm hover:bg-slate-100 transition">
+                            Cerrar sesión
                         </a>
-                        <a href="#" class="bg-white/10 border border-white/20 text-white font-semibold px-5 py-3 rounded-xl hover:bg-white/20 transition">
-                            Ver incidencias
+
+                        <a href="/"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-white/30 text-white font-semibold hover:bg-white/10 transition">
+                            Ir al inicio
                         </a>
                     </div>
                 </div>

@@ -37,6 +37,7 @@ Desarrollar una aplicación web que permita la administración, monitoreo y cont
 
 ## Tabla de Fases
 
+<<<<<<< HEAD
 | Nº    | Actividad del Proyecto             | Descripción                                                                               | Estatus         |
 | ----- | ---------------------------------- | ----------------------------------------------------------------------------------------- | --------------- |
 | **1** | Configuración inicial del proyecto | Instalación y estructura base del servidor usando **Node.js y Express**                   | ✅ Completado    |
