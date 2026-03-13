@@ -154,9 +154,6 @@
             <!-- REPORTAR INCIDENCIA -->
             <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">
-                        ⚠️
-                    </div>
                     <div>
                         <h3 class="text-2xl font-bold text-blue-800">Reportar incidencia</h3>
                         <p class="text-slate-600">Registra cualquier evento durante tu jornada.</p>
@@ -249,22 +246,6 @@
                 map: map,
                 title: "Ubicación actual del chofer"
             });
-
-            const ruta = [
-                { lat: 20.2767, lng: -97.9611 },
-                { lat: 20.2810, lng: -97.9550 },
-                { lat: 20.2875, lng: -97.9490 }
-            ];
-
-            const polyline = new google.maps.Polyline({
-                path: ruta,
-                geodesic: true,
-                strokeColor: "#114078",
-                strokeOpacity: 1.0,
-                strokeWeight: 4
-            });
-
-            polyline.setMap(map);
         }
     </script>
 
