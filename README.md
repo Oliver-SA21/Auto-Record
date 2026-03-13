@@ -42,7 +42,6 @@ Desarrollar una aplicación web que permita la administración, monitoreo y cont
 | ----- | ---------------------------------- | ----------------------------------------------------------------------------------------- | --------------- |
 | **1** | Configuración inicial del proyecto | Instalación y estructura base del servidor usando **Node.js y Express**                   | ✅ Completado    |
 | **2** | Creación de interfaz base          | Desarrollo del **index principal y estilos CSS** del sistema                              | ✅ Completado    |
-| **3** | Integración de nuevas pantallas    | Implementación de las vistas del sistema (**chofer, checador, información, etc.**)        | ✅ Completado    |
-| **4** | Configuración de APIs              | Integración de **Google Maps API y autenticación social (Google / Facebook)**             | ✅ Completado    |
-| **5** | Implementación de base de datos    | Integración de una **base de datos para almacenamiento de usuarios, rutas e incidencias** | ⏳ En desarrollo |
-| **6** | Documentación                      | Elaboración de la **documentación técnica y de uso del sistema**                          | ❌ Pendiente     |
+| **3** | Configuración de APIs              | Integración de **Google Maps API y autenticación social (Google / Facebook)**             | ✅ Completado    |
+| **4** | Implementación de base de datos    | Integración de una **base de datos para almacenamiento de usuarios, rutas e incidencias** | ⏳ En desarrollo |
+| **5** | Documentación                      | Elaboración de la **documentación técnica y de uso del sistema**                          | ❌ Pendiente     |
