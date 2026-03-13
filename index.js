@@ -51,7 +51,8 @@ app.get("/checador", (req, res) => {
 
 app.get("/chofer", (req, res) => {
   res.render("frontend/chofer", {
-    user: req.user || null
+    user: req.user || null,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || ""
   });
 });
 
