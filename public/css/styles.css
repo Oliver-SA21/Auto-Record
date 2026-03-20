@@ -335,6 +335,9 @@
   .h-px {
     height: 1px;
   }
+  .max-h-\[340px\] {
+    max-height: 340px;
+  }
   .min-h-screen {
     min-height: 100vh;
   }
@@ -370,9 +373,6 @@
   }
   .min-w-\[650px\] {
     min-width: 650px;
-  }
-  .min-w-\[700px\] {
-    min-width: 700px;
   }
   .flex-1 {
     flex: 1;
@@ -481,6 +481,9 @@
   }
   .overflow-x-auto {
     overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl);

@@ -99,6 +99,7 @@ app.post("/login-local", async (req, res) => {
 
     req.session.user = {
       id_usuario: usuario.id_usuario,
+      name: usuario.nombre,
       nombre: usuario.nombre,
       correo: usuario.correo,
       telefono: usuario.telefono,
@@ -138,12 +139,83 @@ app.get("/login-social", (req, res) => {
   res.render("frontend/login-social", { rol, error });
 });
 
-app.get("/checador", (req, res) => {
-  const user = req.user || req.session.user || null;
+app.get("/checador", async (req, res) => {
+  try {
+    const user = req.user || req.session.user || null;
 
-  res.render("frontend/checador", {
-    user,
-  });
+    if (!user) {
+      return res.redirect("/login-social?rol=checador&error=Inicia sesión primero");
+    }
+
+    const idRuta = user.id_ruta;
+
+    const [choferesRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_choferes
+      FROM usuarios
+      WHERE id_rol = 2
+        AND id_ruta = ?
+      `,
+      [idRuta]
+    );
+
+    const [unidadesRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_unidades
+      FROM unidades
+      WHERE id_ruta = ?
+        AND estado = 'activa'
+      `,
+      [idRuta]
+    );
+
+    const [incidenciasRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_incidencias
+      FROM incidencias
+      WHERE id_ruta = ?
+        AND DATE(fecha_reporte) = CURDATE()
+      `,
+      [idRuta]
+    );
+
+    const [tablaRows] = await pool.query(
+      `
+      SELECT 
+        u.nombre,
+        COALESCE(un.numero_unidad, 'Sin unidad') AS numero_unidad,
+        ru.nombre_ruta,
+        CASE
+          WHEN un.estado = 'activa' THEN 'Activa'
+          WHEN un.estado = 'inactiva' THEN 'Inactiva'
+          WHEN un.estado = 'mantenimiento' THEN 'Mantenimiento'
+          ELSE 'Sin registrar'
+        END AS estatus
+      FROM usuarios u
+      INNER JOIN rutas ru ON u.id_ruta = ru.id_ruta
+      LEFT JOIN unidades un ON un.id_chofer = u.id_usuario
+      WHERE u.id_rol = 2
+        AND u.id_ruta = ?
+      ORDER BY CAST(SUBSTRING_INDEX(u.nombre, '-', -1) AS UNSIGNED) ASC
+      `,
+      [idRuta]
+    );
+
+    const stats = {
+      choferes: choferesRows[0]?.total_choferes || 0,
+      unidades: unidadesRows[0]?.total_unidades || 0,
+      incidencias: incidenciasRows[0]?.total_incidencias || 0,
+    };
+
+    res.render("frontend/checador", {
+      user,
+      stats,
+      choferes: tablaRows || [],
+    });
+  } catch (error) {
+  console.error("Error cargando panel de checador:", error);
+  res.status(500).send(`Error al cargar el panel del checador: ${error.message}`);
+}
 });
 
 app.get("/chofer", (req, res) => {
