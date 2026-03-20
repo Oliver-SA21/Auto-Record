@@ -50,7 +50,7 @@ app.post("/login-local", async (req, res) => {
     const { correo, telefono, password, rol } = req.body;
 
     if ((!correo && !telefono) || !password) {
-      return res.status(400).send("Faltan datos para iniciar sesión");
+      return res.redirect(`/login-social?rol=${rol || "usuario"}&error=Por favor, completa todos los campos.`);
     }
 
     let query = `
@@ -84,17 +84,17 @@ app.post("/login-local", async (req, res) => {
     const [rows] = await pool.query(query, params);
 
     if (rows.length === 0) {
-      return res.status(401).send("Usuario no encontrado");
+      return res.redirect(`/login-social?rol=${rol || "usuario"}&error=Datos incorrectos`);
     }
 
     const usuario = rows[0];
 
     if (usuario.password !== password) {
-      return res.status(401).send("Contraseña incorrecta");
+      return res.redirect(`/login-social?rol=${rol || "usuario"}&error=Datos incorrectos`);
     }
 
     if (rol && usuario.nombre_rol !== rol) {
-      return res.status(403).send("El rol no coincide con este usuario");
+      return res.redirect(`/login-social?rol=${rol || "usuario"}&error=Datos incorrectos`);
     }
 
     req.session.user = {
@@ -119,7 +119,7 @@ app.post("/login-local", async (req, res) => {
     return res.redirect("/");
   } catch (error) {
     console.error("Error en login local:", error);
-    return res.status(500).send("Error interno del servidor");
+    return res.redirect(`/login-social?rol=${req.body.rol || "usuario"}&error=Error del servidor`);
   }
 });
 
@@ -133,7 +133,9 @@ app.get("/", (req, res) => {
 
 app.get("/login-social", (req, res) => {
   const rol = req.query.rol || "usuario";
-  res.render("frontend/login-social", { rol });
+  const error = req.query.error || null;
+
+  res.render("frontend/login-social", { rol, error });
 });
 
 app.get("/checador", (req, res) => {
