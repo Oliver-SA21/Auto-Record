@@ -52,32 +52,27 @@
 
         <section class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
             <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
-                <p class="text-sm text-slate-500 mb-2">Choferes</p>
-                <h3 class="text-2xl font-bold text-blue-700"><%= stats.choferes %></h3>
-                <p class="text-sm text-slate-600">Choferes actualmente en operación.</p>
+                <p class="text-sm text-slate-500 mb-2">Unidades</p>
+                <h3 class="text-2xl font-bold text-blue-700"><%= stats.totalRuta %></h3>
+                <p class="text-sm text-slate-600">Total de unidades asignadas a esta ruta.</p>
             </div>
 
             <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
-                <p class="text-sm text-slate-500 mb-2">Unidades en ruta</p>
-                <h3 class="text-2xl font-bold text-blue-700"><%= stats.unidades %></h3>
-                <p class="text-sm text-slate-600">Unidades activas dentro del servicio.</p>
+                <p class="text-sm text-slate-500 mb-2">Unidades activas</p>
+                <h3 class="text-2xl font-bold text-blue-700"><%= stats.activas %></h3>
+                <p class="text-sm text-slate-600">Unidades disponibles actualmente para operar.</p>
             </div>
 
             <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
-                <p class="text-sm text-slate-500 mb-2">Incidencias reportadas</p>
-                <h3 class="text-2xl font-bold text-blue-700"><%= stats.incidencias %></h3>
-                <p class="text-sm text-slate-600">Eventos o incidencias registradas hoy.</p>
+                <p class="text-sm text-slate-500 mb-2">En mantenimiento</p>
+                <h3 class="text-2xl font-bold text-blue-700"><%= stats.mantenimiento %></h3>
+                <p class="text-sm text-slate-600">Unidades fuera de servicio por revisión o reparación.</p>
             </div>
 
-            <div class="bg-gradient-to-br from-blue-700 to-sky-500 text-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
-                <div>
-                    <p class="text-sm text-blue-100 mb-2">Acción rápida</p>
-                    <h3 class="text-2xl font-bold mb-3">Reporte Vueltas</h3>
-                    <p class="text-sm text-blue-100">Consulta el resumen general de la jornada.</p>
-                </div>
-                <a href="#" class="mt-5 inline-block bg-white text-blue-700 font-semibold px-4 py-2 rounded-xl hover:bg-slate-100 transition">
-                    Ver reporte
-                </a>
+            <div class="bg-white rounded-2xl border border-blue-100 shadow-md p-6">
+                <p class="text-sm text-slate-500 mb-2">Unidades inactivas</p>
+                <h3 class="text-2xl font-bold text-blue-700"><%= stats.inactivas %></h3>
+                <p class="text-sm text-slate-600">Unidades sin disponibilidad operativa actualmente.</p>
             </div>
         </section>
 
@@ -144,6 +139,23 @@
 
         </form>
     </div>
+
+    <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-6 mt-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h3 class="text-xl font-bold text-blue-800 mb-1">Reporte diario</h3>
+                <p class="text-sm text-slate-500">
+                    Consulta el resumen general de vueltas registradas en la jornada.
+                </p>
+            </div>
+
+            <a href="/reporte-vueltas"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-blue-700 text-white font-semibold shadow-md hover:bg-blue-800 transition">
+                Ver reporte
+            </a>
+        </div> 
+    </div>
+
 </div>
 
             <div class="lg:col-span-3 space-y-6">

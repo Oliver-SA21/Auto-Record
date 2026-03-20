@@ -149,19 +149,18 @@ app.get("/checador", async (req, res) => {
 
     const idRuta = user.id_ruta;
 
-    const [choferesRows] = await pool.query(
+    const [totalUnidadesRows] = await pool.query(
       `
-      SELECT COUNT(*) AS total_choferes
-      FROM usuarios
-      WHERE id_rol = 2
-        AND id_ruta = ?
+      SELECT COUNT(*) AS total_unidades_ruta
+      FROM unidades
+      WHERE id_ruta = ?
       `,
       [idRuta]
     );
 
-    const [unidadesRows] = await pool.query(
+    const [activasRows] = await pool.query(
       `
-      SELECT COUNT(*) AS total_unidades
+      SELECT COUNT(*) AS total_activas
       FROM unidades
       WHERE id_ruta = ?
         AND estado = 'activa'
@@ -169,12 +168,22 @@ app.get("/checador", async (req, res) => {
       [idRuta]
     );
 
-    const [incidenciasRows] = await pool.query(
+    const [mantenimientoRows] = await pool.query(
       `
-      SELECT COUNT(*) AS total_incidencias
-      FROM incidencias
+      SELECT COUNT(*) AS total_mantenimiento
+      FROM unidades
       WHERE id_ruta = ?
-        AND DATE(fecha_reporte) = CURDATE()
+        AND estado = 'mantenimiento'
+      `,
+      [idRuta]
+    );
+
+    const [inactivasRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_inactivas
+      FROM unidades
+      WHERE id_ruta = ?
+        AND estado = 'inactiva'
       `,
       [idRuta]
     );
@@ -202,9 +211,10 @@ app.get("/checador", async (req, res) => {
     );
 
     const stats = {
-      choferes: choferesRows[0]?.total_choferes || 0,
-      unidades: unidadesRows[0]?.total_unidades || 0,
-      incidencias: incidenciasRows[0]?.total_incidencias || 0,
+      totalRuta: totalUnidadesRows[0]?.total_unidades_ruta || 0,
+      activas: activasRows[0]?.total_activas || 0,
+      mantenimiento: mantenimientoRows[0]?.total_mantenimiento || 0,
+      inactivas: inactivasRows[0]?.total_inactivas || 0,
     };
 
     res.render("frontend/checador", {
