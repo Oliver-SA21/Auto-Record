@@ -38,7 +38,7 @@
                     </span>
                     <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Panel del Checador</h2>
                     <p class="text-lg text-slate-600">
-                        Bienvenido(a), <strong class="text-blue-800"><%= user.name %></strong>. Desde este panel puedes registrar vueltas, supervisar choferes en servicio y mantener el control diario de las rutas activas.
+                        Bienvenido(a), <strong class="text-blue-800"><%= user?.name || user?.nombre || "Usuario" %></strong>. Desde este panel puedes registrar vueltas, supervisar choferes en servicio y mantener el control diario de las rutas activas.
                     </p>
                 </div>
 

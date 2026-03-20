@@ -31,11 +31,22 @@
 
     <main class="max-w-7xl mx-auto px-6 py-12">
         <section class="mb-10">
-            <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Panel del Chofer</h2>
-                <p class="text-lg text-slate-600">
-                    Bienvenido(a), <strong class="text-blue-800"><%= user?.name || "Usuario" %></strong>. Desde este panel puedes consultar tu ruta, visualizar tu operación reciente y reportar incidencias durante tu jornada.
-                </p>
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+                        Módulo de operacion y manejo
+                    </span>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Panel del Chofer</h2>
+                    <p class="text-lg text-slate-600">
+                        Bienvenido(a), <strong class="text-blue-800"><%= user?.name || user?.nombre || "Usuario" %></strong>. Desde este panel puedes consultar tu ruta, visualizar tu operación reciente y reportar incidencias durante tu jornada.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md border border-blue-100 p-5 min-w-[260px]">
+                    <p class="text-sm text-slate-500 mb-1">Rol activo</p>
+                    <p class="text-xl font-bold text-blue-800">Chofer</p>
+                    <p class="text-sm text-slate-600 mt-2">Manejo de rutas y operaciones diarias.</p>
+                </div>
             </div>
         </section>
 
