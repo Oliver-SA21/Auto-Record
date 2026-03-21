@@ -203,7 +203,7 @@ app.get("/checador", async (req, res) => {
       LEFT JOIN unidades un ON un.id_chofer = u.id_usuario
       WHERE u.id_rol = 2
         AND u.id_ruta = ?
-      ORDER BY u.nombre ASC
+      ORDER BY CAST(SUBSTRING_INDEX(u.nombre, '-', -1) AS UNSIGNED) ASC
       `,
       [idRuta]
     );
@@ -235,7 +235,7 @@ app.get("/chofer", (req, res) => {
   });
 });
 
-app.get("/reporte-vueltas", async (req, res) => {
+app.get("/reportes", async (req, res) => {
   try {
     const user = req.user || req.session.user || null;
 
@@ -244,51 +244,29 @@ app.get("/reporte-vueltas", async (req, res) => {
     }
 
     const idRuta = user.id_ruta;
-    const choferFiltro = req.query.chofer || "";
 
-    const [reportesRows] = await pool.query(
-      `
-      SELECT
-        ru.nombre_ruta,
-        u.nombre AS chofer,
-        un.numero_unidad,
-        rv.hora_salida,
-        rv.hora_llegada,
-        rv.ingresos,
-        rv.estado_vuelta
-      FROM registros_vuelta rv
-      INNER JOIN usuarios u ON rv.id_chofer = u.id_usuario
-      INNER JOIN unidades un ON rv.id_unidad = un.id_unidad
-      INNER JOIN rutas ru ON rv.id_ruta = ru.id_ruta
-      WHERE rv.id_ruta = ?
-      ORDER BY rv.id_registro DESC
-      `,
-      [idRuta]
-    );
-
-    const [resumenRows] = await pool.query(
-      `
-      SELECT
-        COUNT(*) AS totalVueltas,
-        COUNT(DISTINCT rv.id_chofer) AS totalChoferes,
-        COALESCE(SUM(rv.ingresos), 0) AS totalIngresos
-      FROM registros_vuelta rv
-      WHERE rv.id_ruta = ?
-      `,
-      [idRuta]
-    );
-
+    // Lista de choferes de la ruta
     const [choferesFiltroRows] = await pool.query(
       `
-      SELECT DISTINCT u.id_usuario, u.nombre
-      FROM incidencias i
-      INNER JOIN usuarios u ON i.id_chofer = u.id_usuario
-      WHERE i.id_ruta = ?
-      ORDER BY u.nombre ASC
+      SELECT u.id_usuario, u.nombre
+      FROM usuarios u
+      WHERE u.id_ruta = ?
+        AND u.id_rol = 2
+      ORDER BY CAST(SUBSTRING_INDEX(u.nombre, '-', -1) AS UNSIGNED) ASC
       `,
       [idRuta]
     );
 
+    // Si no viene filtro, por defecto selecciona el primer chofer
+    let choferFiltro = req.query.chofer || "";
+
+    if (!choferFiltro && choferesFiltroRows.length > 0) {
+      choferFiltro = choferesFiltroRows[0].id_usuario;
+    }
+
+    // =========================
+    // TABLA 1: INCIDENCIAS
+    // =========================
     let incidenciasQuery = `
       SELECT
         u.nombre AS chofer,
@@ -310,17 +288,13 @@ app.get("/reporte-vueltas", async (req, res) => {
       incidenciasParams.push(choferFiltro);
     }
 
-    incidenciasQuery += ` ORDER BY u.nombre ASC, i.fecha_reporte DESC `;
+    incidenciasQuery += `
+      ORDER BY 
+        CAST(SUBSTRING_INDEX(u.nombre, '-', -1) AS UNSIGNED) ASC,
+        i.fecha_reporte DESC
+    `;
 
     const [incidenciasRows] = await pool.query(incidenciasQuery, incidenciasParams);
-
-    const reportes = (reportesRows || []).map((r) => ({
-      ...r,
-      hora_salida: r.hora_salida ? String(r.hora_salida).slice(0, 5) : "-",
-      hora_llegada: r.hora_llegada ? String(r.hora_llegada).slice(0, 5) : "-",
-      estado_vuelta: r.estado_vuelta || "Sin registrar",
-      ingresos: Number(r.ingresos || 0).toFixed(2),
-    }));
 
     const incidencias = (incidenciasRows || []).map((i) => ({
       ...i,
@@ -329,30 +303,52 @@ app.get("/reporte-vueltas", async (req, res) => {
         : "-",
     }));
 
-    const resumen = {
-      totalVueltas: resumenRows[0]?.totalVueltas || 0,
-      totalChoferes: resumenRows[0]?.totalChoferes || 0,
-      totalIngresos: Number(resumenRows[0]?.totalIngresos || 0).toFixed(2),
-    };
+    // =========================
+    // TABLA 2: REGISTROS DE VUELTA
+    // =========================
+    let vueltasQuery = `
+      SELECT
+        u.nombre AS chofer,
+        COALESCE(un.numero_unidad, 'Sin unidad') AS numero_unidad,
+        rv.hora_salida,
+        rv.hora_llegada,
+        rv.ingresos
+      FROM registros_vuelta rv
+      INNER JOIN usuarios u ON rv.id_chofer = u.id_usuario
+      LEFT JOIN unidades un ON rv.id_unidad = un.id_unidad
+      WHERE u.id_ruta = ?
+    `;
 
-    const fechaActual = new Date().toLocaleDateString("es-MX", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const vueltasParams = [idRuta];
 
-    res.render("frontend/reportes", {
+    if (choferFiltro) {
+      vueltasQuery += ` AND rv.id_chofer = ? `;
+      vueltasParams.push(choferFiltro);
+    }
+
+    vueltasQuery += `
+      ORDER BY rv.fecha_registro DESC, rv.id_registro DESC
+    `;
+
+    const [vueltasRows] = await pool.query(vueltasQuery, vueltasParams);
+
+    const vueltas = (vueltasRows || []).map((v) => ({
+      ...v,
+      hora_salida: v.hora_salida ? String(v.hora_salida).slice(0, 5) : "-",
+      hora_llegada: v.hora_llegada ? String(v.hora_llegada).slice(0, 5) : "-",
+      ingresos: Number(v.ingresos || 0).toFixed(2),
+    }));
+
+    res.render("frontend/Reportes", {
       user,
-      reportes,
-      incidencias,
-      resumen,
-      fechaActual,
       choferesFiltro: choferesFiltroRows || [],
       choferFiltro,
+      incidencias,
+      vueltas,
     });
   } catch (error) {
-    console.error("Error cargando reporte:", error);
-    res.status(500).send(`Error cargando reporte: ${error.message}`);
+    console.error("Error cargando reportes:", error);
+    res.status(500).send(`Error cargando reportes: ${error.message}`);
   }
 });
 
@@ -374,12 +370,6 @@ app.get("/informacion", (req, res) => {
 app.get("/nosotros", (req, res) => {
   const user = req.user || req.session.user || null;
   res.render("frontend/Nosotros", { user });
-});
-
-app.get("/reportes", (req, res) => {
-  const user = req.user || req.session.user || null;
-
-  res.render("frontend/Reportes", { user });
 });
 
 app.listen(PORT, () => {

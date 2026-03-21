@@ -239,6 +239,15 @@
   .fixed {
     position: fixed;
   }
+  .sticky {
+    position: sticky;
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .z-10 {
+    z-index: 10;
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -341,8 +350,29 @@
   .h-px {
     height: 1px;
   }
+  .max-h-\[0px\] {
+    max-height: 0px;
+  }
+  .max-h-\[3px\] {
+    max-height: 3px;
+  }
+  .max-h-\[320px\] {
+    max-height: 320px;
+  }
+  .max-h-\[325px\] {
+    max-height: 325px;
+  }
+  .max-h-\[330px\] {
+    max-height: 330px;
+  }
   .max-h-\[340px\] {
     max-height: 340px;
+  }
+  .max-h-\[360px\] {
+    max-height: 360px;
+  }
+  .max-h-\[420px\] {
+    max-height: 420px;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -723,6 +753,9 @@
   }
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
+  }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
   }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
