@@ -33,7 +33,6 @@
 
     <div class="max-w-6xl mx-auto px-6 mt-10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-
             <div>
                 <h2 class="text-3xl font-bold text-slate-900">Reportes del sistema</h2>
                 <p class="text-slate-500 mt-1">
@@ -46,208 +45,216 @@
                 Volver al panel
             </a>
         </div>
-
     </div>
 
-<section class="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg border border-blue-100 p-8 mb-10">
-    
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
-        <div>
-            <h3 class="text-2xl font-bold text-slate-900">Reporte de incidencias</h3>
-            <p class="text-slate-500">
-                Consulta las incidencias registradas por los choferes de la ruta.
-            </p>
+    <!-- TABLA 1: INCIDENCIAS -->
+    <section class="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg border border-blue-100 p-8 mb-10">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900">Reporte de incidencias</h3>
+                <p class="text-slate-500">
+                    Consulta las incidencias registradas por los choferes de la ruta.
+                </p>
+            </div>
+
+            <form method="GET" action="/reportes" class="flex flex-col sm:flex-row gap-3">
+                <input type="hidden" name="choferVuelta" value="<%= choferVuelta || '' %>">
+                <input type="hidden" name="fechaVuelta" value="<%= fechaVuelta || '' %>">
+
+                <select name="choferIncidencia" class="rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <option value="">Todos los choferes</option>
+                    <% (choferesFiltro || []).forEach(c => { %>
+                        <option value="<%= c.id_usuario %>" <%= String(choferIncidencia || "") === String(c.id_usuario) ? "selected" : "" %>>
+                            <%= c.nombre %>
+                        </option>
+                    <% }) %>
+                </select>
+
+                <button type="submit"
+                    class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800 transition">
+                    Filtrar
+                </button>
+
+                <a
+                    href="/reportes?<%= choferVuelta ? `choferVuelta=${choferVuelta}` : '' %><%= choferVuelta && fechaVuelta ? '&' : '' %><%= fechaVuelta ? `fechaVuelta=${fechaVuelta}` : '' %>"
+                    class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-blue-200 text-blue-700 font-semibold hover:bg-slate-50 transition">
+                    Limpiar
+                </a>
+            </form>
         </div>
 
-        <form method="GET" action="/reportes" class="flex flex-col sm:flex-row gap-3">
-            <select
-                name="chofer"
-                class="rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-                <option value="">Todos los choferes</option>
-                <% (choferesFiltro || []).forEach(c => { %>
-                    <option value="<%= c.id_usuario %>" <%= String(choferFiltro || "") === String(c.id_usuario) ? "selected" : "" %>>
-                        <%= c.nombre %>
-                    </option>
-                <% }) %>
-            </select>
+        <div class="overflow-x-auto overflow-y-auto max-h-[340px]">
+            <table class="w-full text-sm text-left border-collapse">
+                <thead class="sticky top-0 bg-blue-50 text-slate-700 z-10">
+                    <tr>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Chofer</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Unidad</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Tipo de incidencia</th>
+                        <th class="px-4 py-3 font-semibold">Descripción</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Ubicación</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Fecha de reporte</th>
+                    </tr>
+                </thead>
 
-            <button
-                type="submit"
-                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800 transition"
-            >
-                Filtrar
-            </button>
+                <tbody class="divide-y divide-slate-200">
+                    <% if (incidencias && incidencias.length > 0) { %>
+                        <% incidencias.forEach(i => { %>
+                            <tr class="hover:bg-slate-50 align-top">
+                                <td class="px-4 py-4 font-medium text-slate-800 whitespace-nowrap">
+                                    <%= i.chofer %>
+                                </td>
 
-            <a
-                href="/reportes"
-                class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-blue-200 text-blue-700 font-semibold hover:bg-slate-50 transition"
-            >
-                Limpiar
-            </a>
-        </form>
-    </div>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= i.numero_unidad %>
+                                </td>
 
-    <div class="overflow-x-auto overflow-y-auto max-h-[340px]">
-        <table class="w-full text-sm text-left border-collapse">
-            <thead>
-                <tr class="bg-blue-50 text-slate-700">
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Chofer</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Unidad</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Tipo de incidencia</th>
-                    <th class="px-4 py-3 font-semibold">Descripción</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Ubicación</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Fecha de reporte</th>
-                </tr>
-            </thead>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <% if (i.tipo_incidencia === "Falla mecánica") { %>
+                                        <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-3 py-1 text-sm font-semibold">
+                                            <%= i.tipo_incidencia %>
+                                        </span>
+                                    <% } else if (i.tipo_incidencia === "Accidente menor") { %>
+                                        <span class="inline-flex items-center rounded-full bg-red-100 text-red-700 px-3 py-1 text-sm font-semibold">
+                                            <%= i.tipo_incidencia %>
+                                        </span>
+                                    <% } else if (i.tipo_incidencia === "Problema de tránsito") { %>
+                                        <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-sm font-semibold">
+                                            <%= i.tipo_incidencia %>
+                                        </span>
+                                    <% } else { %>
+                                        <span class="inline-flex items-center rounded-full bg-slate-200 text-slate-700 px-3 py-1 text-sm font-semibold">
+                                            <%= i.tipo_incidencia %>
+                                        </span>
+                                    <% } %>
+                                </td>
 
-            <tbody class="divide-y divide-slate-200">
-                <% if (incidencias && incidencias.length > 0) { %>
-                    <% incidencias.forEach(i => { %>
-                        <tr class="hover:bg-slate-50 align-top">
-                            <td class="px-4 py-4 font-medium text-slate-800 whitespace-nowrap">
-                                <%= i.chofer %>
-                            </td>
+                                <td class="px-4 py-4 text-slate-700 max-w-[260px] break-words">
+                                    <%= i.descripcion %>
+                                </td>
 
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= i.numero_unidad %>
-                            </td>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= i.ubicacion || "Sin ubicación" %>
+                                </td>
 
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <% if (i.tipo_incidencia === "Falla mecánica") { %>
-                                    <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-3 py-1 text-sm font-semibold">
-                                        <%= i.tipo_incidencia %>
-                                    </span>
-                                <% } else if (i.tipo_incidencia === "Accidente menor") { %>
-                                    <span class="inline-flex items-center rounded-full bg-red-100 text-red-700 px-3 py-1 text-sm font-semibold">
-                                        <%= i.tipo_incidencia %>
-                                    </span>
-                                <% } else if (i.tipo_incidencia === "Problema de tránsito") { %>
-                                    <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-sm font-semibold">
-                                        <%= i.tipo_incidencia %>
-                                    </span>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= i.fecha_reporte %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" class="px-4 py-8 text-center text-slate-500">
+                                <% if (choferIncidencia) { %>
+                                    No se han registrado incidencias para este chofer.
                                 <% } else { %>
-                                    <span class="inline-flex items-center rounded-full bg-slate-200 text-slate-700 px-3 py-1 text-sm font-semibold">
-                                        <%= i.tipo_incidencia %>
-                                    </span>
+                                    No hay incidencias registradas para mostrar.
                                 <% } %>
                             </td>
-
-                            <td class="px-4 py-4 text-slate-700 max-w-[260px] break-words">
-                                <%= i.descripcion %>
-                            </td>
-
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= i.ubicacion || "Sin ubicación" %>
-                            </td>
-
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= i.fecha_reporte %>
-                            </td>
                         </tr>
-                    <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="6" class="px-4 py-8 text-center text-slate-500">
-                            <% if (choferFiltro) { %>
-                                No se han registrado incidencias para este chofer.
-                            <% } else { %>
-                                No hay incidencias registradas para mostrar.
-                            <% } %>
-                        </td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
-    </div>
-</section>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-<section class="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg border border-blue-100 p-8 mb-10">
-    
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
-        <div>
-            <h3 class="text-2xl font-bold text-slate-900">Reporte de vueltas</h3>
-            <p class="text-slate-500">
-                Consulta los registros de salida, llegada e ingresos por conductor.
-            </p>
+    <!-- TABLA 2: VUELTAS -->
+    <section class="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg border border-blue-100 p-8 mb-10">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900">Reporte de vueltas</h3>
+                <p class="text-slate-500">
+                    Consulta los registros de salida, llegada e ingresos por conductor.
+                </p>
+            </div>
+
+            <form method="GET" action="/reportes" class="flex flex-col sm:flex-row gap-3">
+    <input type="hidden" name="choferIncidencia" value="<%= choferIncidencia || '' %>">
+
+    <select
+        name="choferVuelta"
+        class="rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+        <option value="">Todos los conductores</option>
+        <% (choferesFiltro || []).forEach(c => { %>
+            <option value="<%= c.id_usuario %>" <%= String(choferVuelta || "") === String(c.id_usuario) ? "selected" : "" %>>
+                <%= c.nombre %>
+            </option>
+        <% }) %>
+    </select>
+
+    <input
+        type="date"
+        name="fechaVuelta"
+        value="<%= fechaVuelta || '' %>"
+        class="rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+    <button
+        type="submit"
+        class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800 transition"
+    >
+        Filtrar
+    </button>
+    <a
+        href="/reportes?<%= choferIncidencia ? `choferIncidencia=${choferIncidencia}` : '' %>"
+        class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-blue-200 text-blue-700 font-semibold hover:bg-slate-50 transition"
+    >
+        Limpiar
+    </a>
+</form>
         </div>
 
-        <form method="GET" action="/reportes" class="flex flex-col sm:flex-row gap-3">
-            <select
-                name="chofer"
-                class="rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-                <% (choferesFiltro || []).forEach(c => { %>
-                    <option value="<%= c.id_usuario %>" <%= String(choferFiltro || "") === String(c.id_usuario) ? "selected" : "" %>>
-                        <%= c.nombre %>
-                    </option>
-                <% }) %>
-            </select>
+        <div class="overflow-x-auto overflow-y-auto max-h-[360px] rounded-2xl">
+            <table class="w-full text-sm text-left border-collapse">
+                <thead class="sticky top-0 bg-blue-50 text-slate-700 z-10">
+                    <tr>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Conductor</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Unidad</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Salida</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Llegada</th>
+                        <th class="px-4 py-3 font-semibold whitespace-nowrap">Ingreso</th>
+                    </tr>
+                </thead>
 
-            <button
-                type="submit"
-                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-blue-700 text-white font-semibold hover:bg-blue-800 transition"
-            >
-                Filtrar
-            </button>
+                <tbody class="divide-y divide-slate-200">
+                    <% if (vueltas && vueltas.length > 0) { %>
+                        <% vueltas.forEach(v => { %>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-4 font-medium text-slate-800 whitespace-nowrap">
+                                    <%= v.chofer %>
+                                </td>
 
-            <a
-                href="/reportes"
-                class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-blue-200 text-blue-700 font-semibold hover:bg-slate-50 transition"
-            >
-                Limpiar
-            </a>
-        </form>
-    </div>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= v.numero_unidad %>
+                                </td>
 
-    <div class="overflow-x-auto overflow-y-auto max-h-[360px] rounded-2xl">
-        <table class="w-full text-sm text-left border-collapse">
-            <thead class="sticky top-0 bg-blue-50 text-slate-700 z-10">
-                <tr>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Conductor</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Unidad</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Salida</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Llegada</th>
-                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Ingreso</th>
-                </tr>
-            </thead>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= v.hora_salida %>
+                                </td>
 
-            <tbody class="divide-y divide-slate-200">
-                <% if (vueltas && vueltas.length > 0) { %>
-                    <% vueltas.forEach(v => { %>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-4 font-medium text-slate-800 whitespace-nowrap">
-                                <%= v.chofer %>
-                            </td>
+                                <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
+                                    <%= v.hora_llegada %>
+                                </td>
 
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= v.numero_unidad %>
-                            </td>
-
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= v.hora_salida %>
-                            </td>
-
-                            <td class="px-4 py-4 text-slate-700 whitespace-nowrap">
-                                <%= v.hora_llegada %>
-                            </td>
-
-                            <td class="px-4 py-4 text-blue-700 font-semibold whitespace-nowrap">
-                                $<%= v.ingresos %>
+                                <td class="px-4 py-4 text-blue-700 font-semibold whitespace-nowrap">
+                                    $<%= v.ingresos %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="px-4 py-8 text-center text-slate-500">
+                                <% if (choferVuelta) { %>
+                                    No se han registrado vueltas para este conductor.
+                                <% } else { %>
+                                    No hay registros de vueltas para mostrar.
+                                <% } %>
                             </td>
                         </tr>
-                    <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="5" class="px-4 py-8 text-center text-slate-500">
-                            No se han registrado vueltas para este conductor.
-                        </td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
-    </div>
-</section>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
 </main>
 

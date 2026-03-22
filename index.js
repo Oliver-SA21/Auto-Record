@@ -137,6 +137,70 @@ app.get("/login-social", (req, res) => {
   res.render("frontend/login-social", { rol, error });
 });
 
+// RUTA PARA GUARDAR REGISTRO DE VUELTA
+app.post("/guardar-vuelta", async (req, res) => {
+  try {
+    const user = req.user || req.session.user || null;
+
+    if (!user) {
+      return res.redirect("/login-social?rol=checador&error=Inicia sesión primero");
+    }
+
+    const { id_unidad, hora_salida, hora_llegada, ingresos } = req.body;
+
+    if (!id_unidad || !hora_salida || !hora_llegada || !ingresos) {
+      return res.redirect("/checador?error=Completa todos los campos del registro");
+    }
+
+    const ingresoNumero = parseFloat(ingresos);
+
+    if (isNaN(ingresoNumero) || ingresoNumero < 0) {
+      return res.redirect("/checador?error=El ingreso no es válido");
+    }
+
+    // Obtener chofer automáticamente desde la unidad
+    const [unidadRows] = await pool.query(
+      `
+      SELECT id_unidad, id_chofer, id_ruta
+      FROM unidades
+      WHERE id_unidad = ?
+      LIMIT 1
+      `,
+      [id_unidad]
+    );
+
+    if (unidadRows.length === 0) {
+      return res.redirect("/checador?error=La unidad seleccionada no existe");
+    }
+
+    const unidad = unidadRows[0];
+
+    if (!unidad.id_chofer) {
+      return res.redirect("/checador?error=La unidad no tiene chofer asignado");
+    }
+
+    // Seguridad: que la unidad pertenezca a la misma ruta del checador
+    if (String(unidad.id_ruta) !== String(user.id_ruta)) {
+      return res.redirect("/checador?error=La unidad no pertenece a tu ruta");
+    }
+
+    await pool.query(
+      `
+      INSERT INTO registros_vuelta
+      (id_unidad, id_chofer, hora_salida, hora_llegada, ingresos, fecha_registro)
+      VALUES (?, ?, ?, ?, ?, CURDATE())
+      `,
+      [unidad.id_unidad, unidad.id_chofer, hora_salida, hora_llegada, ingresoNumero]
+    );
+
+    return res.redirect("/checador?success=Registro guardado correctamente");
+  } catch (error) {
+    console.error("Error guardando vuelta:", error);
+    return res.redirect("/checador?error=No se pudo guardar el registro");
+  }
+});
+
+// Rutas para checador
 app.get("/checador", async (req, res) => {
   try {
     const user = req.user || req.session.user || null;
@@ -208,6 +272,17 @@ app.get("/checador", async (req, res) => {
       [idRuta]
     );
 
+    // NUEVO: unidades para el formulario
+    const [unidadesFormularioRows] = await pool.query(
+      `
+      SELECT id_unidad, numero_unidad, estado, id_chofer
+      FROM unidades
+      WHERE id_ruta = ?
+      ORDER BY numero_unidad ASC
+      `,
+      [idRuta]
+    );
+
     const stats = {
       totalRuta: totalUnidadesRows[0]?.total_unidades_ruta || 0,
       activas: activasRows[0]?.total_activas || 0,
@@ -219,6 +294,9 @@ app.get("/checador", async (req, res) => {
       user,
       stats,
       choferes: tablaRows || [],
+      unidadesFormulario: unidadesFormularioRows || [],
+      success: req.query.success || null,
+      error: req.query.error || null,
     });
   } catch (error) {
     console.error("Error cargando panel de checador:", error);
@@ -235,6 +313,7 @@ app.get("/chofer", (req, res) => {
   });
 });
 
+// RUTA DE REPORTES
 app.get("/reportes", async (req, res) => {
   try {
     const user = req.user || req.session.user || null;
@@ -257,12 +336,10 @@ app.get("/reportes", async (req, res) => {
       [idRuta]
     );
 
-    // Si no viene filtro, por defecto selecciona el primer chofer
-    let choferFiltro = req.query.chofer || "";
-
-    if (!choferFiltro && choferesFiltroRows.length > 0) {
-      choferFiltro = choferesFiltroRows[0].id_usuario;
-    }
+    // Filtros separados por tabla
+    let choferIncidencia = req.query.choferIncidencia || "";
+    let choferVuelta = req.query.choferVuelta || "";
+    let fechaVuelta = req.query.fechaVuelta || "";
 
     // =========================
     // TABLA 1: INCIDENCIAS
@@ -283,9 +360,9 @@ app.get("/reportes", async (req, res) => {
 
     const incidenciasParams = [idRuta];
 
-    if (choferFiltro) {
+    if (choferIncidencia) {
       incidenciasQuery += ` AND i.id_chofer = ? `;
-      incidenciasParams.push(choferFiltro);
+      incidenciasParams.push(choferIncidencia);
     }
 
     incidenciasQuery += `
@@ -312,7 +389,8 @@ app.get("/reportes", async (req, res) => {
         COALESCE(un.numero_unidad, 'Sin unidad') AS numero_unidad,
         rv.hora_salida,
         rv.hora_llegada,
-        rv.ingresos
+        rv.ingresos,
+        rv.fecha_registro
       FROM registros_vuelta rv
       INNER JOIN usuarios u ON rv.id_chofer = u.id_usuario
       LEFT JOIN unidades un ON rv.id_unidad = un.id_unidad
@@ -321,9 +399,14 @@ app.get("/reportes", async (req, res) => {
 
     const vueltasParams = [idRuta];
 
-    if (choferFiltro) {
+    if (choferVuelta) {
       vueltasQuery += ` AND rv.id_chofer = ? `;
-      vueltasParams.push(choferFiltro);
+      vueltasParams.push(choferVuelta);
+    }
+
+    if (fechaVuelta) {
+      vueltasQuery += ` AND rv.fecha_registro = ? `;
+      vueltasParams.push(fechaVuelta);
     }
 
     vueltasQuery += `
@@ -336,13 +419,16 @@ app.get("/reportes", async (req, res) => {
       ...v,
       hora_salida: v.hora_salida ? String(v.hora_salida).slice(0, 5) : "-",
       hora_llegada: v.hora_llegada ? String(v.hora_llegada).slice(0, 5) : "-",
+      fecha_registro: v.fecha_registro || "-",
       ingresos: Number(v.ingresos || 0).toFixed(2),
     }));
 
     res.render("frontend/Reportes", {
       user,
       choferesFiltro: choferesFiltroRows || [],
-      choferFiltro,
+      choferIncidencia,
+      choferVuelta,
+      fechaVuelta,
       incidencias,
       vueltas,
     });

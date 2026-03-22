@@ -79,66 +79,86 @@
         <section class="grid lg:grid-cols-5 gap-8">
             <div class="lg:col-span-2">
     <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
-        <div class="flex items-center gap-3 mb-6">
+    <div class="flex items-center gap-3 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold text-blue-800">Registro de Vuelta</h3>
+            <p class="text-sm text-slate-500">Captura horarios y asignaciones del servicio</p>
+        </div>
+    </div>
+
+    <% if (success) { %>
+        <div class="mb-4 rounded-xl bg-green-100 text-green-700 px-4 py-3 font-semibold">
+            <%= success %>
+        </div>
+    <% } %>
+
+    <% if (error) { %>
+        <div class="mb-4 rounded-xl bg-red-100 text-red-700 px-4 py-3 font-semibold">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <form class="space-y-5" method="POST" action="/guardar-vuelta">
+
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Unidad asignada</label>
+            <select
+                name="id_unidad"
+                required
+                class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+                <option value="">Seleccionar</option>
+                <% (unidadesFormulario || []).forEach(unidad => { %>
+                    <option value="<%= unidad.id_unidad %>">
+                        <%= unidad.numero_unidad %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
             <div>
-                <h3 class="text-2xl font-bold text-blue-800">Registro de Vuelta</h3>
-                <p class="text-sm text-slate-500">Captura horarios y asignaciones del servicio</p>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de salida</label>
+                <input
+                    type="time"
+                    name="hora_salida"
+                    required
+                    class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de llegada</label>
+                <input
+                    type="time"
+                    name="hora_llegada"
+                    required
+                    class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
             </div>
         </div>
 
-        <form class="space-y-5">
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Ingreso ($)</label>
+            <input
+                type="number"
+                step="0.01"
+                min="0"
+                name="ingresos"
+                required
+                placeholder="Ej. 850.00"
+                class="w-full rounded-xl border border-green-200 bg-green-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+            >
+        </div>
 
-            <!-- UNIDAD -->
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Unidad asignada</label>
-                <select name="id_unidad"
-                    class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <option value="">Seleccionar</option>
-                    <option value="5">TP-482</option>
-                    <option value="6">TP-501</option>
-                    <option value="7">TP-399</option>
-                </select>
-            </div>
-
-            <!-- CHOFER -->
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Nombre del chofer</label>
-                <select name="id_chofer"
-                    class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <option value="">Selecciona</option>
-                    <option value="2">Carlos Méndez</option>
-                    <option value="3">Ana Ramírez</option>
-                    <option value="12">José Gutiérrez</option>
-                    <option value="22">Laura Sánchez</option>
-                </select>
-            </div>
-
-            <!-- HORAS -->
-            <div class="grid md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de salida</label>
-                    <input type="time" name="hora_salida"
-                        class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Hora de llegada</label>
-                    <input type="time" name="hora_llegada"
-                        class="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                </div>
-            </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Ingreso ($)</label>
-                <input type="number" step="0.01" name="ingresos" placeholder="Ej. 850.00"
-                    class="w-full rounded-xl border border-green-200 bg-green-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400">
-            </div>
-            <button type="submit"
-                class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition">
-                Guardar registro
-            </button>
-
-        </form>
-    </div>
+        <button
+            type="submit"
+            class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition"
+        >
+            Guardar registro
+        </button>
+    </form>
+</div>
 
     <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-6 mt-6">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
