@@ -10,23 +10,33 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center px-4 py-10">
 
     <div class="w-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl border border-blue-100 p-6 md:p-10">
-        <div class="grid lg:grid-cols-2 gap-8 items-start">
 
-            <!-- COLUMNA IZQUIERDA -->
-            <div class="bg-white rounded-3xl p-4 md:p-8">
-                <div class="text-center mb-8">
-                    <div class="flex justify-center mb-4">
-                        <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-20 h-20 rounded-full object-cover border-2 border-blue-100 shadow-md">
-                    </div>
+    <% if (error) { %>
+        <div class="mb-6 rounded-2xl bg-red-100 border border-red-200 text-red-700 px-5 py-4 text-sm font-semibold text-center shadow-sm">
+            <%= error %>
+        </div>
+    <% } %>
 
-                    <h1 class="text-4xl font-extrabold text-slate-900 mb-3">Bienvenido</h1>
-                    <p class="text-slate-600">
-                        Inicia sesión para continuar como
-                        <span class="font-bold text-blue-700 capitalize"><%= rol %></span>
-                    </p>
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="bg-white rounded-3xl p-4 md:p-8">
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-20 h-20 rounded-full object-cover border-2 border-blue-100 shadow-md">
                 </div>
 
-                <form id="emailLoginForm" class="space-y-5">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-3">Bienvenido</h1>
+                <p class="text-slate-600">
+                    Inicia sesión para continuar como
+                    <span class="font-bold text-blue-700 capitalize"><%= rol %></span>
+                </p>
+            </div>
+
+                <!-- LOGIN POR CORREO -->
+                <form id="emailLoginForm" class="space-y-5" method="POST" action="/login-local">
+                    <input type="hidden" name="rol" value="<%= rol %>">
+
                     <div>
                         <label for="correoEmail" class="block text-sm font-semibold text-slate-700 mb-2">
                             Correo electrónico
@@ -115,8 +125,10 @@
                     <div class="flex-1 h-px bg-slate-200"></div>
                 </div>
 
-                <!-- TELEFONO -->
-                <form id="phoneLoginForm" class="space-y-5">
+                <!-- LOGIN POR TELÉFONO -->
+                <form id="phoneLoginForm" class="space-y-5" method="POST" action="/login-local">
+                    <input type="hidden" name="rol" value="<%= rol %>">
+
                     <div>
                         <label for="telefono" class="block text-sm font-semibold text-slate-700 mb-2">
                             Número telefónico
@@ -173,43 +185,43 @@
     </div>
 
     <script>
-        // LOGIN POR CORREO
+        // VALIDACIÓN LOGIN POR CORREO
         const emailLoginForm = document.getElementById('emailLoginForm');
         const correoEmail = document.getElementById('correoEmail');
         const passwordEmail = document.getElementById('passwordEmail');
         const errorMsgEmail = document.getElementById('errorMsgEmail');
 
         emailLoginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
             const correoValor = correoEmail.value.trim();
             const passwordValor = passwordEmail.value.trim();
 
-            errorMsgEmail.classList.remove('hidden');
+            errorMsgEmail.classList.add('hidden');
+            errorMsgEmail.textContent = '';
 
             if (!correoValor || !passwordValor) {
+                e.preventDefault();
+                errorMsgEmail.classList.remove('hidden');
                 errorMsgEmail.textContent = 'Por favor, completa todos los campos.';
                 return;
             }
-
-            errorMsgEmail.textContent = 'Los datos ingresados no son válidos.';
         });
 
-        // LOGIN POR TELÉFONO
+        // VALIDACIÓN LOGIN POR TELÉFONO
         const phoneLoginForm = document.getElementById('phoneLoginForm');
         const telefono = document.getElementById('telefono');
         const passwordTelefono = document.getElementById('passwordTelefono');
         const errorMsgTelefono = document.getElementById('errorMsgTelefono');
 
         phoneLoginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
             const telefonoValor = telefono.value.trim();
             const passwordValor = passwordTelefono.value.trim();
 
-            errorMsgTelefono.classList.remove('hidden');
+            errorMsgTelefono.classList.add('hidden');
+            errorMsgTelefono.textContent = '';
 
             if (!telefonoValor || !passwordValor) {
+                e.preventDefault();
+                errorMsgTelefono.classList.remove('hidden');
                 errorMsgTelefono.textContent = 'Por favor, completa todos los campos.';
                 return;
             }
@@ -217,11 +229,11 @@
             const telefonoLimpio = telefonoValor.replace(/\s+/g, '');
 
             if (!/^\d{10}$/.test(telefonoLimpio)) {
+                e.preventDefault();
+                errorMsgTelefono.classList.remove('hidden');
                 errorMsgTelefono.textContent = 'Ingresa un número telefónico válido de 10 dígitos.';
                 return;
             }
-
-            errorMsgTelefono.textContent = 'Los datos ingresados no son válidos.';
         });
     </script>
 
