@@ -49,97 +49,114 @@
                 </div>
             </div>
         </section>
-
-        <!-- FILA 1 -->
         <section class="grid lg:grid-cols-2 gap-8 mb-8">
+            
+            <div class="bg-white rounded-3xl shadow-md border border-blue-100 p-6">
+    
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+        <div>
+            <h3 class="text-2xl font-bold text-blue-900">Historial de vueltas</h3>
+            <p class="text-slate-600 mt-1">>Consulta tus registros recientes por día</p>
+        </div>
 
-            <!-- HISTORIAL -->
-            <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
-                <h3 class="text-2xl font-bold text-blue-900 mb-2">Historial de rutas recientes</h3>
-                <p class="text-slate-600 mb-6">Consulta tus últimos registros de servicio.</p>
+        <form method="GET" action="/chofer" class="flex flex-col items-end gap-2">
+            <input
+                type="date"
+                name="fecha"
+                value="<%= fechaFiltro || '' %>"
+                class="text-sm rounded-lg border border-blue-200 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
 
-                <div class="overflow-x-auto">
-                    <table class="w-full min-w-[650px] text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 text-sm">
-                                <th class="px-4 py-3 rounded-l-xl">Fecha</th>
-                                <th class="px-4 py-3">Ruta</th>
-                                <th class="px-4 py-3">Horas</th>
-                                <th class="px-4 py-3 rounded-r-xl">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-slate-700">
-                            <tr class="border-b border-slate-200">
-                                <td class="px-4 py-4">10/12/2025</td>
-                                <td class="px-4 py-4">Ruta 3 - Centro</td>
-                                <td class="px-4 py-4">06:00 - 14:00</td>
-                                <td class="px-4 py-4">
-                                    <span class="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full">
-                                        Completada
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b border-slate-200">
-                                <td class="px-4 py-4">09/12/2025</td>
-                                <td class="px-4 py-4">Ruta 3 - Centro</td>
-                                <td class="px-4 py-4">06:15 - 13:50</td>
-                                <td class="px-4 py-4">
-                                    <span class="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full">
-                                        Completada
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-4">08/12/2025</td>
-                                <td class="px-4 py-4">Ruta 3 - Centro</td>
-                                <td class="px-4 py-4">06:00 - 12:30</td>
-                                <td class="px-4 py-4">
-                                    <span class="inline-block bg-sky-100 text-sky-700 text-sm font-semibold px-3 py-1 rounded-full">
-                                        Incidencia
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="flex gap-2">
+                <button
+                    type="submit"
+                    class="px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition"
+                >
+                    Filtrar
+                </button>
+
+                <a
+                    href="/chofer"
+                    class="px-4 py-2 rounded-lg border border-blue-200 text-blue-700 text-sm font-semibold hover:bg-slate-50 transition"
+                >
+                    Limpiar
+                </a>
             </div>
+        </form>
+    </div>
 
-            <!-- TU RUTA -->
+    <div class="overflow-y-auto max-h-[220px]">
+        <table class="w-full text-sm text-left border-collapse">
+            <thead class="bg-slate-100 text-slate-700 sticky top-0">
+                <tr>
+                    <th class="px-3 py-2 font-semibold">Fecha</th>
+                    <th class="px-3 py-2 font-semibold">Salida</th>
+                    <th class="px-3 py-2 font-semibold">Llegada</th>
+                    <th class="px-3 py-2 font-semibold">Ingreso</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+                <% if (vueltas && vueltas.length > 0) { %>
+                    <% vueltas.forEach(v => { %>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-3 py-2"><%= v.fecha_registro %></td>
+                            <td class="px-3 py-2"><%= v.hora_salida %></td>
+                            <td class="px-3 py-2"><%= v.hora_llegada %></td>
+                            <td class="px-3 py-2 font-semibold text-blue-700">$<%= v.ingresos %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4" class="px-3 py-6 text-center text-slate-500">
+                            <% if (fechaFiltro) { %>
+                                No hay vueltas registradas para esa fecha.
+                            <% } else { %>
+                                No hay vueltas registradas para mostrar.
+                            <% } %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
             <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
-                <div class="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Tu ruta asignada</h3>
-                        <p class="text-slate-600">Información principal de tu servicio actual.</p>
-                    </div>
-                    <span class="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-2 rounded-full">
-                        En servicio
-                    </span>
-                </div>
+    <div class="flex items-start justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold text-blue-900">Tu ruta asignada</h3>
+            <p class="text-slate-600 mt-1">Información principal de tu servicio actual.</p>
+        </div>
 
-                <div class="grid sm:grid-cols-2 gap-4 mb-4">
-                    <div class="rounded-2xl border border-blue-100 bg-slate-50 p-5">
-                        <p class="text-sm text-slate-500 mb-2">Ruta</p>
-                        <p class="text-2xl font-bold text-slate-900">Ruta 3 - Centro</p>
-                    </div>
+        <span class="inline-flex items-center rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm font-semibold">
+            <%= rutaInfo?.estado_label || "Sin registrar" %>
+        </span>
+    </div>
 
-                    <div class="rounded-2xl border border-blue-100 bg-slate-50 p-5">
-                        <p class="text-sm text-slate-500 mb-2">Horario</p>
-                        <p class="text-2xl font-bold text-slate-900">6:00 - 14:00</p>
-                    </div>
-                </div>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div class="rounded-2xl border border-blue-100 bg-slate-50 p-6">
+            <p class="text-sm text-slate-500 mb-2">Ruta</p>
+            <h4 class="text-2xl font-bold text-blue-900">
+                <%= rutaInfo?.nombre_ruta || "Sin ruta" %>
+            </h4>
+        </div>
 
-                <div class="rounded-2xl border border-blue-100 bg-slate-50 p-5 mb-4">
-                    <p class="text-sm text-slate-500 mb-2">Paradas principales</p>
-                    <p class="text-xl font-semibold text-slate-800">Terminal Norte / Plaza Central / Mercado Sur</p>
-                </div>
+        <div class="rounded-2xl border border-blue-100 bg-slate-50 p-6">
+            <p class="text-sm text-slate-500 mb-2">Horario</p>
+            <h4 class="text-2xl font-bold text-blue-900">
+                <%= rutaInfo?.horario_inicio || "--:--" %> - <%= rutaInfo?.horario_fin || "--:--" %>
+            </h4>
+        </div>
+    </div>
 
-                <div class="rounded-2xl border border-blue-100 bg-slate-50 p-5">
-                    <p class="text-sm text-slate-500 mb-2">Observación</p>
-                    <p class="text-slate-700 text-lg">
-                        Mantén actualizado tu estado y reporta cualquier incidencia para mejorar la coordinación del servicio.
-                    </p>
-                </div>
-            </div>
+    <div class="rounded-2xl border border-blue-100 bg-slate-50 p-6">
+        <p class="text-sm text-slate-500 mb-2">Paradas principales</p>
+        <h4 class="text-2xl font-bold text-blue-900 leading-snug">
+            <%= rutaInfo?.paradas_principales || "Sin información" %>
+        </h4>
+    </div>
+</div>
         </section>
 
         <!-- FILA 2 -->
@@ -164,51 +181,70 @@
 
             <!-- REPORTAR INCIDENCIA -->
             <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
-                <div class="flex items-center gap-4 mb-6">
-                    <div>
-                        <h3 class="text-2xl font-bold text-blue-800">Reportar incidencia</h3>
-                        <p class="text-slate-600">Registra cualquier evento durante tu jornada.</p>
-                    </div>
-                </div>
+    <div class="flex items-center gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold text-blue-800">Reportar incidencia</h3>
+            <p class="text-slate-600">Registra cualquier evento durante tu jornada.</p>
+        </div>
+    </div>
 
-                <form class="incident-form space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo de incidencia</label>
-                        <select class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option>Seleccionar tipo de incidencia</option>
-                            <option>Falla mecánica</option>
-                            <option>Accidente menor</option>
-                            <option>Problema de tránsito</option>
-                            <option>Otro</option>
-                        </select>
-                    </div>
+    <% if (success) { %>
+        <div class="mb-4 rounded-xl bg-green-100 text-green-700 px-4 py-3 font-semibold">
+            <%= success %>
+        </div>
+    <% } %>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Descripción</label>
-                        <textarea
-                            rows="5"
-                            placeholder="Describe brevemente lo ocurrido..."
-                            class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        ></textarea>
-                    </div>
+    <% if (error) { %>
+        <div class="mb-4 rounded-xl bg-red-100 text-red-700 px-4 py-3 font-semibold">
+            <%= error %>
+        </div>
+    <% } %>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Ubicación (opcional)</label>
-                        <input
-                            type="text"
-                            placeholder="Ej. Av. Juárez y Calle 5"
-                            class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        >
-                    </div>
+    <form method="POST" action="/guardar-incidencia" class="incident-form space-y-5">
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo de incidencia</label>
+            <select
+                name="tipo_incidencia"
+                required
+                class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+                <option value="">Seleccionar tipo de incidencia</option>
+                <option value="Falla mecánica">Falla mecánica</option>
+                <option value="Accidente menor">Accidente menor</option>
+                <option value="Problema de tránsito">Problema de tránsito</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
 
-                    <button
-                        type="button"
-                        class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition btn-primary"
-                    >
-                        Guardar registro
-                    </button>
-                </form>
-            </div>
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Descripción</label>
+            <textarea
+                name="descripcion"
+                rows="5"
+                required
+                placeholder="Describe brevemente lo ocurrido..."
+                class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            ></textarea>
+        </div>
+
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Ubicación (opcional)</label>
+            <input
+                type="text"
+                name="ubicacion"
+                placeholder="Ej. Av. Juárez y Calle 5"
+                class="w-full rounded-2xl border border-blue-200 bg-slate-50 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+        </div>
+
+        <button
+            type="submit"
+            class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-4 rounded-2xl shadow-md transition btn-primary"
+        >
+            Guardar registro
+        </button>
+    </form>
+</div>
         </section>
 
         <!-- FILA 3 -->
