@@ -54,7 +54,7 @@ Desarrollar una aplicación web que permita la administración, monitoreo y cont
 Se comprueba que toda la navegacion basica funcione correctamente
 
 <img src="public/img/Pruebas/P1_1.png" width="700">
-<figcaption>Vista del módulo Inicial</figcaption>
+<p>Vista del módulo Inicial</p>
 <br><br>
 
 <img src="public/img/Pruebas/P1_2.png" width="700">
