@@ -137,6 +137,110 @@ app.get("/login-social", (req, res) => {
   res.render("frontend/login-social", { rol, error });
 });
 
+// Rutas para checador
+app.get("/checador", async (req, res) => {
+  try {
+    const user = req.user || req.session.user || null;
+
+    if (!user) {
+      return res.redirect("/login-social?rol=checador&error=Inicia sesión primero");
+    }
+
+    const idRuta = user.id_ruta;
+
+    const [totalUnidadesRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_unidades_ruta
+      FROM unidades
+      WHERE id_ruta = ?
+      `,
+      [idRuta]
+    );
+
+    const [activasRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_activas
+      FROM unidades
+      WHERE id_ruta = ?
+        AND estado = 'activa'
+      `,
+      [idRuta]
+    );
+
+    const [mantenimientoRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_mantenimiento
+      FROM unidades
+      WHERE id_ruta = ?
+        AND estado = 'mantenimiento'
+      `,
+      [idRuta]
+    );
+
+    const [inactivasRows] = await pool.query(
+      `
+      SELECT COUNT(*) AS total_inactivas
+      FROM unidades
+      WHERE id_ruta = ?
+        AND estado = 'inactiva'
+      `,
+      [idRuta]
+    );
+
+    const [tablaRows] = await pool.query(
+      `
+      SELECT 
+        u.nombre,
+        COALESCE(un.numero_unidad, 'Sin unidad') AS numero_unidad,
+        ru.nombre_ruta,
+        CASE
+          WHEN un.estado = 'activa' THEN 'Activa'
+          WHEN un.estado = 'inactiva' THEN 'Inactiva'
+          WHEN un.estado = 'mantenimiento' THEN 'Mantenimiento'
+          ELSE 'Sin registrar'
+        END AS estatus
+      FROM usuarios u
+      INNER JOIN rutas ru ON u.id_ruta = ru.id_ruta
+      LEFT JOIN unidades un ON un.id_chofer = u.id_usuario
+      WHERE u.id_rol = 2
+        AND u.id_ruta = ?
+      ORDER BY CAST(SUBSTRING_INDEX(u.nombre, '-', -1) AS UNSIGNED) ASC
+      `,
+      [idRuta]
+    );
+
+    // NUEVO: unidades para el formulario
+    const [unidadesFormularioRows] = await pool.query(
+      `
+      SELECT id_unidad, numero_unidad, estado, id_chofer
+      FROM unidades
+      WHERE id_ruta = ?
+      ORDER BY numero_unidad ASC
+      `,
+      [idRuta]
+    );
+
+    const stats = {
+      totalRuta: totalUnidadesRows[0]?.total_unidades_ruta || 0,
+      activas: activasRows[0]?.total_activas || 0,
+      mantenimiento: mantenimientoRows[0]?.total_mantenimiento || 0,
+      inactivas: inactivasRows[0]?.total_inactivas || 0,
+    };
+
+    res.render("frontend/checador", {
+      user,
+      stats,
+      choferes: tablaRows || [],
+      unidadesFormulario: unidadesFormularioRows || [],
+      success: req.query.success || null,
+      error: req.query.error || null,
+    });
+  } catch (error) {
+    console.error("Error cargando panel de checador:", error);
+    res.status(500).send(`Error al cargar el panel del checador: ${error.message}`);
+  }
+});
+
 // GUARDAR REGISTRO DE VUELTA
 app.post("/guardar-vuelta", async (req, res) => {
   try {
