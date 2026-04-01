@@ -58,143 +58,143 @@ Se comprueba que toda la navegacion basica funcione correctamente
 <br><br>
 
 <img src="public/img/Pruebas/P1_2.png" width="700">
-<figcaption>Vista del módulo Funciones</figcaption>
+<p>Vista del módulo Funciones</p>
 <br><br>
 
 <img src="public/img/Pruebas/P1_3.png" width="700">
-<figcaption>Vista del módulo Descargas</figcaption>
+<p>Vista del módulo Descargas</p>
 <br><br>
 
 <img src="public/img/Pruebas/P1_4.png" width="700">
-<figcaption>Vista del módulo Nosotros</figcaption>
+<p>Vista del módulo Nosotros</p>
 <br><br>
 
 <img src="public/img/Pruebas/P1_5.png" width="700">
-<figcaption>Vista del módulo Informacion</figcaption>
+<p>Vista del módulo Informacion</p>
 <br><br>
 
 ### Prueba02: Descarga
 En el codigo que dio funcion al boton de descargar, de momento el archivo adjuntado para la descarga es una prueba
 
 <img src="public/img/Pruebas/P2_1.png" width="700">
-<figcaption>En el apartado superior se visualiza la correcta funcion el boton</figcaption>
+<p>En el apartado superior se visualiza la correcta funcion el boton</p>
 <br><br>
 
 ### Prueba03: Funcion de las Apis de Login
 Se usuaron apis de login de google y facebook
 
 <img src="public/img/Pruebas/P3_1.png" width="700">
-<figcaption>Modulo de login</figcaption>
+<p>Modulo de login</p>
 <br><br>
 
 #### Goggle
 <img src="public/img/Pruebas/P3_2.png" width="700">
-<figcaption>Logeo con Goggle</figcaption>
+<p>Logeo con Goggle</p>
 <br>
 
 <img src="public/img/Pruebas/P3_3.png" width="700">
-<figcaption>Logeo con Goggle(Resultado)</figcaption>
+<p>Logeo con Goggle(Resultado)</p>
 <br><br>
 
 #### Facebook
 <img src="public/img/Pruebas/P3_4.png" width="700">
-<figcaption>Logeo con Facebook</figcaption>
+<p>Logeo con Facebook</p>
 <br>
 
 <img src="public/img/Pruebas/P3_5.png" width="700">
-<figcaption>Logeo con Facebook(Resultado)</figcaption>
+<p>Logeo con Facebook(Resultado)</p>
 <br><br>
 
 ### Prueba04: Logeo con usuarios en la BD
 Se conecto el codigo a la BD para tener tener una mejor gestion de usuarios
 
 <img src="public/img/Pruebas/P4_1.png" width="700">
-<figcaption>Logeo con correo</figcaption>
+<p>Logeo con correo</p>
 <br><br>
 
 <img src="public/img/Pruebas/P4_2.png" width="700">
-<figcaption>Logeo con numero telefonico</figcaption>
+<p>Logeo con numero telefonico</p>
 <br><br>
 
 <img src="public/img/Pruebas/P4_3.png" width="700">
-<figcaption>Resultado</figcaption>
+<p>Resultado</p>
 <br><br>
 
 ### Prueba05: Error en logeo
 El logeo funciona dando una "ID" para identificar el rol del usuario a logear si es Checador en la BD tiene que coincidir los datos, en caso de no funcionar dan error
 
 <img src="public/img/Pruebas/P5_1.png" width="700">
-<figcaption>Error: Datos incompletos</figcaption>
+<p>Error: Datos incompletos</p>
 <br><br>
 
 <img src="public/img/Pruebas/P5_2.png" width="700">
-<figcaption>Error: Datos Erroneos</figcaption>
+<p>Error: Datos Erroneos</p>
 <br><br>
 
 ### Prueba06: Conexcion de la BD a los datos del Usuario
 Los datos del usuario que estan Guardados en la BD se usan para el codigo, 
 
 <img src="public/img/Pruebas/P6_1.png" width="700">
-<figcaption>Datos del Checador, se muestra datos de su ruta asignada</figcaption>
+<p>Datos del Checador, se muestra datos de su ruta asignada</p>
 <br><br>
 
 <img src="public/img/Pruebas/P6_2.png" width="700">
-<figcaption>En el panel del conductor solo muestra datos como nombre y rol</figcaption>
+<p>En el panel del conductor solo muestra datos como nombre y rol</p>
 <br><br>
 
 #### Tablas de los roles
 
 <img src="public/img/Pruebas/P6_3.png" width="400">
-<figcaption>Tabla de conductores activos</figcaption>
+<p>Tabla de conductores activos</p>
 <br><br>
 
 <img src="public/img/Pruebas/P6_4.png" width="400">
-<figcaption>Tabla de vueltas realizadas del conductor</figcaption>
+<p>Tabla de vueltas realizadas del conductor</p>
 <br><br>
 
 ### Prueba07: Api de Mapas
 
 <img src="public/img/Pruebas/P7_1.png" width="400">
-<figcaption>Api de Mapas cargado correctamente</figcaption>
+<p>Api de Mapas cargado correctamente</p>
 <br><br>
 
 ### Prueba08: Subir reportes a la BD
 
 #### Conductor
 <img src="public/img/Pruebas/P8_1.png" width="400">
-<figcaption>Introduccion de Datos para el reporte</figcaption>
+<p>Introduccion de Datos para el reporte</p>
 <br><br>
 
 <img src="public/img/Pruebas/P8_2.png" width="400">
-<figcaption>Se subio el Reporte correctamente</figcaption>
+<p>Se subio el Reporte correctamente</p>
 <br><br>
 
 <img src="public/img/Pruebas/P8_3.png" width="700">
-<figcaption>Vista desde la BD</figcaption>
+<p>Vista desde la BD</p>
 <br><br>
 
 #### Operador
 <img src="public/img/Pruebas/P8_4.png" width="400">
-<figcaption>Introduccion de Datos para el registro de vueltas</figcaption>
+<p>Introduccion de Datos para el registro de vueltas</p>
 <br><br>
 
 <img src="public/img/Pruebas/P8_5.png" width="400">
-<figcaption>Se subio el Registo correctamente</figcaption>
+<p>Se subio el Registo correctamente</p>
 <br><br>
 
 <img src="public/img/Pruebas/P8_6.png" width="700">
-<figcaption>Vista desde la BD</figcaption>
+<p>Vista desde la BD</p>
 <br><br>
 
 ### Prueba09: Correcta carga de las Tablas
 
 <img src="public/img/Pruebas/P9_1.png" width="700">
-<figcaption>Correcta visualizacion de los Reportes/Registros</figcaption>
+<p>Correcta visualizacion de los Reportes/Registros</p>
 <br><br>
 
 
 ### Prueba10: Correcta carga de los filtros
 
 <img src="public/img/Pruebas/P10_1.png" width="700">
-<figcaption>Correcta visualizacion de los filtros</figcaption>
+<p>Correcta visualizacion de los filtros</p>
 <br><br>
