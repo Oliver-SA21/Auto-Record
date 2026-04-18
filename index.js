@@ -4,19 +4,22 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
-const pool = require("./config/db");
+const pool = require("./backend/config/db");
 
-require("./config/passport");
+require("./backend/config/passport");
 
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./backend/routes/auth");
 
 const app = express();
 const PORT = 3000;
 
+// Configuración EJS
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "frontend", "views"));
 
-app.use(express.static(path.join(__dirname, "public")));
+// Archivos estáticos
+app.use(express.static(path.join(__dirname, "frontend", "public")));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -209,7 +212,6 @@ app.get("/checador", async (req, res) => {
       [idRuta]
     );
 
-    // NUEVO: unidades para el formulario
     const [unidadesFormularioRows] = await pool.query(
       `
       SELECT id_unidad, numero_unidad, estado, id_chofer
