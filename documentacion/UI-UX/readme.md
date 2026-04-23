@@ -72,7 +72,7 @@ Esta vista fue diseñada para:
 - ofrecer navegación clara
 - brindar acceso a módulos internos
 
-<img src="capturas/mockups/inicio.png" width="700">
+<img src="mockups/inicio.png" width="700">
 
 ### 2. Pantalla de inicio de sesión
 
@@ -83,7 +83,7 @@ Su diseño se enfocó en:
 - facilidad de acceso
 - claridad en el proceso de autenticación
 
-<img src="capturas/mockups/login.png" width="700">
+<img src="mockups/login.png" width="700">
 
 ### 3. Panel del checador
 
@@ -95,7 +95,7 @@ Elementos destacados:
 - estado de choferes
 - acceso a reportes
 
-<img src="capturas/mockups/checador.png" width="700">
+<img src="mockups/checador.png" width="700">
 
 ### 4. Panel del chofer
 
@@ -108,19 +108,19 @@ Elementos destacados:
 - mapa de ubicación
 - formulario de reporte de incidencias
 
-<img src="capturas/mockups/chofer.png" width="700">
+<img src="mockups/chofer.png" width="700">
 
 ### 5. Pantalla de reportes
 
 La vista de reportes fue diseñada para facilitar el análisis de información registrada en el sistema. Se incluyeron filtros, tablas y una estructura clara para consultar incidencias y vueltas.
 
-<img src="capturas/mockups/reportes.png" width="700">
+<img src="mockups/reportes.png" width="700">
 
 ### 6. Panel visual de API
 
 Como parte complementaria del proyecto, se desarrolló una interfaz visual para probar la API propia del sistema. Esta pantalla permite interactuar con endpoints relacionados con incidencias de manera más amigable y comprensible.
 
-<img src="capturas/mockups/api.png" width="700">
+<img src="mockups/api.png" width="700">
 
 ---
 
