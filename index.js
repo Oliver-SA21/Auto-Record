@@ -9,9 +9,10 @@ const pool = require("./backend/config/db");
 require("./backend/config/passport");
 
 const authRoutes = require("./backend/routes/auth");
+const incidenciasApiRoutes = require("./backend/api/routes/incidencias.routes");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Configuración EJS
 app.set("view engine", "ejs");
@@ -35,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoutes);
+app.use("/api/incidencias", incidenciasApiRoutes);
 
 // Probar conexión a MySQL
 (async () => {
@@ -46,6 +48,11 @@ app.use("/auth", authRoutes);
     console.error("Error conectando a MySQL:", error.message);
   }
 })();
+
+app.get("/api-panel", (req, res) => {
+  const user = req.user || req.session.user || null;
+  res.render("api-panel", { user });
+});
 
 // LOGIN LOCAL
 app.post("/login-local", async (req, res) => {

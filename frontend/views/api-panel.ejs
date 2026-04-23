@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto-Record - API Visual</title>
+  <link rel="icon" type="image/x-icon" href="/img/google.ico">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-sky-500 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="/img/LogoProyecto.jpeg" alt="Logo Auto-Record" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md">
+        <div>
+          <h1 class="text-2xl font-bold tracking-wide">Auto-Record</h1>
+          <p class="text-sm text-blue-100">Panel visual de la API</p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap gap-3 text-sm md:text-base font-medium">
+            <a href="/" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Inicio</a>
+            <a href="/funciones" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Funciones</a>
+            <a href="/descargas" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Descargas</a>
+            <a href="/nosotros" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Nosotros</a>
+            <a href="/informacion" class="px-4 py-2 rounded-lg hover:bg-white/15 transition">Información</a>
+        </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <section class="mb-10">
+      <div class="bg-gradient-to-r from-blue-900 to-sky-600 text-white rounded-3xl shadow-xl p-8 md:p-10">
+        <span class="inline-block bg-white/15 text-blue-100 text-sm font-semibold px-4 py-2 rounded-full mb-5">
+          Pruebas visuales de la API
+        </span>
+
+        <h2 class="text-4xl font-extrabold leading-tight mb-4">
+          API propia de incidencias
+        </h2>
+
+        <p class="text-blue-100 text-lg leading-relaxed max-w-4xl">
+          Este panel permite visualizar y probar los endpoints principales de la API de incidencias del sistema Auto-Record.
+          La información se consume en tiempo real desde la base de datos y se muestra en formato JSON.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-8 mb-10">
+      <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+        <h3 class="text-2xl font-bold text-slate-900 mb-4">Endpoints disponibles</h3>
+
+        <div class="space-y-3 text-sm font-mono">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-green-600 font-bold">GET</span> /api/incidencias</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-green-600 font-bold">GET</span> /api/incidencias/:id</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-blue-600 font-bold">POST</span> /api/incidencias</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-yellow-600 font-bold">PUT</span> /api/incidencias/:id</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-purple-600 font-bold">PATCH</span> /api/incidencias/:id</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-red-600 font-bold">DELETE</span> /api/incidencias/:id</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+        <h3 class="text-2xl font-bold text-slate-900 mb-4">Acciones rápidas</h3>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <button id="btnGetAll" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-3 rounded-xl transition">
+            Ver todas
+          </button>
+
+          <div class="flex gap-2">
+            <input id="incidenciaId" type="number" placeholder="ID" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+            <button id="btnGetById" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-5 py-3 rounded-xl transition">
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-8 mb-10">
+<div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8">
+  <h3 class="text-2xl font-bold text-slate-900 mb-4">Panel de incidencias</h3>
+
+  <!-- Selector -->
+  <div class="mb-6">
+    <label class="block text-sm font-medium text-slate-700 mb-2">Acción</label>
+    <select id="modoFormulario" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+      <option value="create">Crear incidencia</option>
+      <option value="patch">Actualizar tipo de incidencia</option>
+      <option value="delete">Eliminar incidencia</option>
+    </select>
+  </div>
+
+  <!-- Formulario dinámico -->
+  <form id="formDinamico" class="space-y-4">
+
+    <!-- ID unidad -->
+    <div id="campo_id_unidad">
+      <label class="block text-sm font-medium text-slate-700 mb-2">ID unidad</label>
+      <input type="number" id="id_unidad" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+    </div>
+
+    <!-- Tipo -->
+    <div id="campo_tipo">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Tipo de incidencia</label>
+      <input type="text" id="tipo_incidencia" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+    </div>
+
+    <!-- Descripción -->
+    <div id="campo_descripcion">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Descripción</label>
+      <textarea id="descripcion" rows="4" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none"></textarea>
+    </div>
+
+    <!-- Ubicación -->
+    <div id="campo_ubicacion">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Ubicación</label>
+      <input type="text" id="ubicacion" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+    </div>
+
+    <!-- ID incidencia -->
+    <div id="campo_id_incidencia" style="display:none;">
+      <label class="block text-sm font-medium text-slate-700 mb-2">ID incidencia</label>
+      <input type="number" id="id_incidencia" class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none">
+    </div>
+
+    <button type="submit" id="btnAccion"
+      class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-3 rounded-xl transition">
+      Crear incidencia
+    </button>
+  </form>
+</div>
+
+    <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-6 sm:p-8 w-full">
+  <h3 class="text-2xl font-bold text-slate-900 mb-4">Respuesta del servidor</h3>
+
+  <div
+    class="rounded-2xl overflow-hidden"
+    style="
+      background:#0f172a;
+      color:#86efac;
+      min-height: 280px;
+      height: clamp(280px, 45vh, 520px);
+    "
+  >
+    <pre
+      id="output"
+      style="
+        height:100%;
+        margin:0;
+        padding:20px;
+        overflow-y:auto;
+        overflow-x:auto;
+        white-space:pre-wrap;
+        word-break:break-word;
+        font-size:14px;
+        line-height:1.5;
+      "
+    >{
+  "message": "Aquí aparecerá la respuesta JSON"
+}</pre>
+  </div>
+</div>
+    </section>
+
+        <a href="/informacion"
+                class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200 transition shadow-sm">
+                Volver
+            </a>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-200 mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+      TechHive Labs 2025 • Gestión inteligente de transporte público
+    </div>
+  </footer>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function renderJSON(data) {
+      output.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function fetchAllIncidencias() {
+      try {
+        const res = await fetch("/api/incidencias");
+        const data = await res.json();
+        renderJSON(data);
+      } catch (error) {
+        renderJSON({ ok: false, message: "Error al consultar incidencias", error: error.message });
+      }
+    }
+
+    
+
+    async function fetchIncidenciaById() {
+      const id = document.getElementById("incidenciaId").value.trim();
+
+      if (!id) {
+        renderJSON({ ok: false, message: "Ingresa un ID válido" });
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/incidencias/${id}`);
+        const data = await res.json();
+        renderJSON(data);
+      } catch (error) {
+        renderJSON({ ok: false, message: "Error al consultar la incidencia", error: error.message });
+      }
+    }
+
+    async function createIncidencia(e) {
+      e.preventDefault();
+
+      const payload = {
+      id_unidad: Number(document.getElementById("id_unidad").value),
+      tipo_incidencia: document.getElementById("tipo_incidencia").value.trim(),
+      descripcion: document.getElementById("descripcion").value.trim(),
+      ubicacion: document.getElementById("ubicacion").value.trim(),
+    };
+
+      try {
+        const res = await fetch("/api/incidencias", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        renderJSON(data);
+      } catch (error) {
+        renderJSON({ ok: false, message: "Error al crear la incidencia", error: error.message });
+      }
+    }
+
+    document.getElementById("btnGetAll").addEventListener("click", fetchAllIncidencias);
+    document.getElementById("btnGetById").addEventListener("click", fetchIncidenciaById);
+    document.getElementById("formIncidencia").addEventListener("submit", createIncidencia);
+  </script>
+
+<script>
+const modo = document.getElementById("modoFormulario");
+
+const campoUnidad = document.getElementById("campo_id_unidad");
+const campoTipo = document.getElementById("campo_tipo");
+const campoDesc = document.getElementById("campo_descripcion");
+const campoUbic = document.getElementById("campo_ubicacion");
+const campoIdInc = document.getElementById("campo_id_incidencia");
+
+const btn = document.getElementById("btnAccion");
+const form = document.getElementById("formDinamico");
+
+// Cambiar formulario según modo
+modo.addEventListener("change", () => {
+  const m = modo.value;
+
+  if (m === "create") {
+    campoUnidad.style.display = "block";
+    campoTipo.style.display = "block";
+    campoDesc.style.display = "block";
+    campoUbic.style.display = "block";
+    campoIdInc.style.display = "none";
+
+    btn.textContent = "Crear incidencia";
+  }
+
+  if (m === "patch") {
+    campoUnidad.style.display = "none";
+    campoDesc.style.display = "none";
+    campoUbic.style.display = "none";
+    campoTipo.style.display = "block";
+    campoIdInc.style.display = "block";
+
+    btn.textContent = "Actualizar incidencia";
+  }
+
+  if (m === "delete") {
+    campoUnidad.style.display = "none";
+    campoTipo.style.display = "none";
+    campoDesc.style.display = "none";
+    campoUbic.style.display = "none";
+    campoIdInc.style.display = "block";
+
+    btn.textContent = "Eliminar incidencia";
+  }
+});
+
+// Acción del formulario
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const m = modo.value;
+
+  try {
+    let res;
+
+    if (m === "create") {
+      const payload = {
+        id_unidad: Number(document.getElementById("id_unidad").value),
+        tipo_incidencia: document.getElementById("tipo_incidencia").value,
+        descripcion: document.getElementById("descripcion").value,
+        ubicacion: document.getElementById("ubicacion").value,
+      };
+
+      res = await fetch("/api/incidencias", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    }
+
+    if (m === "patch") {
+      const id = document.getElementById("id_incidencia").value;
+
+      res = await fetch(`/api/incidencias/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tipo_incidencia: document.getElementById("tipo_incidencia").value,
+        }),
+      });
+    }
+
+    if (m === "delete") {
+      const id = document.getElementById("id_incidencia").value;
+
+      res = await fetch(`/api/incidencias/${id}`, {
+        method: "DELETE",
+      });
+    }
+
+    const data = await res.json();
+    output.textContent = JSON.stringify(data, null, 2);
+
+    if (data.ok) {
+      form.reset();
+      modo.value = "create";
+      modo.dispatchEvent(new Event("change"));
+    }
+
+  } catch (error) {
+    output.textContent = JSON.stringify({
+      ok: false,
+      error: error.message,
+    }, null, 2);
+  }
+});
+</script>
+
+</body>
+</html>

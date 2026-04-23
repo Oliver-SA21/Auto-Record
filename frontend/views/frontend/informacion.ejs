@@ -152,6 +152,70 @@
             </div>
         </section>
 
+        <section class="mb-14">
+  <div class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 md:p-10">
+    
+    <div class="mb-6">
+      <h2 class="text-3xl font-bold text-slate-900 mb-3">API del sistema</h2>
+      <p class="text-slate-600 leading-relaxed">
+        Auto-Record integra una API propia desarrollada con Node.js y Express, la cual permite gestionar la información operativa del sistema mediante una arquitectura REST.
+        Esta API facilita la comunicación entre el backend y otras posibles aplicaciones, permitiendo consultar, registrar y modificar datos de manera eficiente.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Características</h3>
+        <ul class="text-slate-600 space-y-2">
+          <li>• Arquitectura REST</li>
+          <li>• Métodos HTTP (GET, POST, PUT, PATCH, DELETE)</li>
+          <li>• Respuestas en formato JSON</li>
+          <li>• Conexión a base de datos MySQL</li>
+          <li>• Integración con el sistema Auto-Record</li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Endpoints</h3>
+        <div class="text-sm text-slate-700 space-y-2 font-mono">
+          <p><span class="text-green-600">GET</span> /api/incidencias</p>
+          <p><span class="text-green-600">GET</span> /api/incidencias/:id</p>
+          <p><span class="text-blue-600">POST</span> /api/incidencias</p>
+          <p><span class="text-yellow-600">PUT</span> /api/incidencias/:id</p>
+          <p><span class="text-purple-600">PATCH</span> /api/incidencias/:id</p>
+          <p><span class="text-red-600">DELETE</span> /api/incidencias/:id</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-8">
+      <h3 class="text-xl font-bold text-slate-900 mb-3">Ejemplo de respuesta</h3>
+
+      <div class="bg-slate-900 text-green-400 text-sm rounded-xl p-5 overflow-x-auto font-mono">
+{
+  "ok": true,
+  "data": [
+    {
+      "id_incidencia": 1,
+      "tipo_incidencia": "Falla mecánica",
+      "descripcion": "Problema en frenos",
+      "ubicacion": "Terminal Norte"
+    }
+  ]
+}
+      </div>
+    </div>
+<div class="flex gap-4 mt-4">
+  <a href="/api-panel" 
+     class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition shadow-md">
+    Probar API
+  </a>
+</div>
+  </div>
+        </section>
+
         <section class="bg-white rounded-3xl shadow-lg border border-blue-100 p-8 md:p-10">
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="rounded-2xl bg-slate-50 border border-slate-200 p-6">
