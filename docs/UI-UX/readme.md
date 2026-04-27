@@ -224,3 +224,4 @@ Para la construcción de la propuesta visual se utilizaron herramientas y tecnol
 El apartado de UI/UX de Auto-Record fue desarrollado para responder a necesidades reales del entorno de transporte público, priorizando la claridad, la funcionalidad y la facilidad de uso.
 
 La propuesta visual no solo mejora la apariencia del sistema, sino que también apoya directamente la operación de los usuarios, permitiendo que el sistema sea más útil, accesible y profesional.
+https://www.figma.com/design/p4c284763CrOIinXHfpl4l/Untitled--Copia---Copy-?node-id=4698-2&t=q9r7oMNfn1TcARhk-1
