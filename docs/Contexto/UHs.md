@@ -23,3 +23,13 @@
 **10. Como checador, quiero registrar el inicio de viaje para llevar control horario.**
 
 **11. Como checador, quiero registrar el fin de viaje para cerrar la jornada.**
+
+**12. Como Chofer, quiero iniciar sesión con mis credenciales para que mis recorridos queden vinculados a mi nombre y unidad asignada.**
+
+**13. Como Chofer, quiero ver mi ruta asignada en un mapa interactivo, para conocer las paradas y el trayecto que debo seguir sin desviarme.**
+
+**14. Como Chofer, quiero reportar una incidencia (tráfico, falla, accidente), para justificar retrasos ante el administrador y el checador.**
+
+**15. Como Chofer, quiero visualizar un indicador de tiempo (adelanto/atraso), para ajustar mi velocidad y cumplir con el horario programado.**
+
+**16. Como Chofer, quiero finalizar mi jornada con un botón de cierre, para dejar de compartir mi ubicación GPS y liberar la unidad.**
